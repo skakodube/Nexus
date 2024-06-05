@@ -16,7 +16,7 @@ function App() {
         <NavBar />
       </GridItem>
       <Show above="lg">
-        <GridItem area={"aside"} w="250px">
+        <GridItem area={"aside"} w="250px" paddingRight={10}>
           <Heading mb={3} fontSize="2xl">
             Genres
           </Heading>
