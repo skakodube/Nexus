@@ -8,7 +8,7 @@ interface Props {
 
 const ExtendList = ({ showAll, setShowAll }: Props) => {
   const defaultColor = useColorModeValue("gray.400", "gray.500");
-  const iconColor = useColorModeValue("white", "black");
+  const iconColor = useColorModeValue("white", "gray.800");
   const defaultBg = useColorModeValue("gray.200", "gray.700");
   const hoverBg = useColorModeValue("gray.300", "gray.600");
 

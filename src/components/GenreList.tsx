@@ -50,7 +50,7 @@ const GenreList = ({ selectedGenre, onSelectGenre }: Props) => {
         </ListItem>
       ))}
 
-      {!genres && (
+      {genres && (
         <ListItem paddingY="1px">
           <ExtendList
             showAll={showAll}
