@@ -7,6 +7,8 @@ import {
   Button,
 } from "@chakra-ui/react";
 import useGenres, { Genre } from "../hooks/useGenres";
+import { useState } from "react";
+import ExtendList from "./ExtendList";
 
 interface Props {
   onSelectGenre: (genre: Genre) => void;
@@ -15,11 +17,14 @@ interface Props {
 
 const GenreList = ({ selectedGenre, onSelectGenre }: Props) => {
   const { data: genres, isLoading } = useGenres();
+  const [showAll, setShowAll] = useState(false);
+
+  const displayedGenres = showAll ? genres : genres.slice(0, 3);
 
   return (
     <List>
       {isLoading && <SkeletonText />}
-      {genres.map((genre) => (
+      {displayedGenres.map((genre) => (
         <ListItem key={genre.id} paddingY="4px">
           <HStack>
             <Image
@@ -37,6 +42,10 @@ const GenreList = ({ selectedGenre, onSelectGenre }: Props) => {
           </HStack>
         </ListItem>
       ))}
+
+      <ListItem>
+        <ExtendList showAll={showAll} setShowAll={() => setShowAll(!showAll)} />
+      </ListItem>
     </List>
   );
 };
