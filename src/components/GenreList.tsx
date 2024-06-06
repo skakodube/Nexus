@@ -41,6 +41,7 @@ const GenreList = ({ selectedGenre, onSelectGenre }: Props) => {
                 src={genre.image_background}
               ></Image>
               <Text
+                whiteSpace={"nowrap"}
                 fontWeight={genre.id === selectedGenre?.id ? "bold" : "normal"}
               >
                 {genre.name}
