@@ -6,10 +6,23 @@ import {
   MenuButton,
   MenuItem,
   MenuList,
-  Text,
 } from "@chakra-ui/react";
 
-const SortSelector = () => {
+interface Props {
+  selectedSortOrder: string;
+  onSelectSortOrder: (sortOrder: string) => void;
+}
+
+const SortSelector = ({ selectedSortOrder, onSelectSortOrder }: Props) => {
+  const sortOrders = [
+    { value: "", label: "Relevance" },
+    { value: "-added", label: "Date added" },
+    { value: "name", label: "Name" },
+    { value: "-released", label: "Release Date" },
+    { value: "-metacritic", label: "Popularity" },
+    { value: "-rating", label: "Average rating" },
+  ];
+
   return (
     <Menu>
       <MenuButton
@@ -20,11 +33,22 @@ const SortSelector = () => {
       >
         Order by:{" "}
         <Box fontWeight={"bold"} as="span">
-          Relevance
+          {(selectedSortOrder &&
+            sortOrders.find((order) => order.value === selectedSortOrder)
+              ?.label) ||
+            "Relevance"}
         </Box>
       </MenuButton>
       <MenuList>
-        <MenuItem>Relevance</MenuItem>
+        {sortOrders.map((order) => (
+          <MenuItem
+            onClick={() => onSelectSortOrder(order.value)}
+            value={order.value}
+            key={order.value}
+          >
+            {order.label}
+          </MenuItem>
+        ))}
       </MenuList>
     </Menu>
   );
