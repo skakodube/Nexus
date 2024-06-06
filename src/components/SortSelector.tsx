@@ -23,6 +23,10 @@ const SortSelector = ({ selectedSortOrder, onSelectSortOrder }: Props) => {
     { value: "-rating", label: "Average rating" },
   ];
 
+  const currentSortOrder = sortOrders.find(
+    (order) => order.value === selectedSortOrder
+  );
+
   return (
     <Menu>
       <MenuButton
@@ -33,10 +37,7 @@ const SortSelector = ({ selectedSortOrder, onSelectSortOrder }: Props) => {
       >
         Order by:{" "}
         <Box fontWeight={"bold"} as="span">
-          {(selectedSortOrder &&
-            sortOrders.find((order) => order.value === selectedSortOrder)
-              ?.label) ||
-            "Relevance"}
+          {currentSortOrder?.label || "Relevance"}
         </Box>
       </MenuButton>
       <MenuList>
