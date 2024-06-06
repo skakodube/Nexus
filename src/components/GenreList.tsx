@@ -50,9 +50,14 @@ const GenreList = ({ selectedGenre, onSelectGenre }: Props) => {
         </ListItem>
       ))}
 
-      <ListItem paddingY="1px">
-        <ExtendList showAll={showAll} setShowAll={() => setShowAll(!showAll)} />
-      </ListItem>
+      {!genres && (
+        <ListItem paddingY="1px">
+          <ExtendList
+            showAll={showAll}
+            setShowAll={() => setShowAll(!showAll)}
+          />
+        </ListItem>
+      )}
     </List>
   );
 };
