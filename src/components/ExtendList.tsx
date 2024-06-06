@@ -14,7 +14,7 @@ const ExtendList = ({ showAll, setShowAll }: Props) => {
 
   return (
     <Box
-      mt={1}
+      w={"100%"}
       onClick={() => setShowAll()}
       as="button"
       role="group"
@@ -23,7 +23,7 @@ const ExtendList = ({ showAll, setShowAll }: Props) => {
       <HStack>
         <Box
           _groupHover={{ bg: hoverBg }}
-          borderRadius={8}
+          borderRadius={6}
           boxSize="32px"
           aria-label="Add to friends"
           display="flex"
@@ -35,13 +35,13 @@ const ExtendList = ({ showAll, setShowAll }: Props) => {
             <ChevronUpIcon
               _groupHover={{ color: iconColor }}
               color={defaultColor}
-              boxSize={6}
+              boxSize={7}
             />
           ) : (
             <ChevronDownIcon
               _groupHover={{ color: iconColor }}
               color={defaultColor}
-              boxSize={6}
+              boxSize={7}
             />
           )}
         </Box>

@@ -1,4 +1,4 @@
-import { HStack, Icon, Text } from "@chakra-ui/react";
+import { HStack, Icon } from "@chakra-ui/react";
 import {
   SiXbox,
   SiPlaystation,
@@ -10,32 +10,37 @@ import {
 import { IoPhonePortraitOutline } from "react-icons/io5";
 
 import { BsAndroid2, BsGlobe } from "react-icons/bs";
-import { Platform } from "../hooks/useGames";
+import { Platform } from "../hooks/usePlatforms";
 import { IconType } from "react-icons";
 
 interface Props {
   platforms: Platform[];
 }
 
+export interface PlatformIconMap {
+  [key: string]: IconType;
+}
+
+export const platformIconMap: PlatformIconMap = {
+  pc: SiWindows10,
+  xbox: SiXbox,
+  playstation: SiPlaystation,
+  nintendo: SiNintendoswitch,
+  mac: SiApple,
+  linux: SiLinux,
+  ios: IoPhonePortraitOutline,
+  android: BsAndroid2,
+  web: BsGlobe,
+};
+
 const PlatformIconList = ({ platforms }: Props) => {
-  const iconMap: { [key: string]: IconType } = {
-    pc: SiWindows10,
-    xbox: SiXbox,
-    playstation: SiPlaystation,
-    nintendo: SiNintendoswitch,
-    mac: SiApple,
-    linux: SiLinux,
-    ios: IoPhonePortraitOutline,
-    android: BsAndroid2,
-    web: BsGlobe,
-  };
   return (
     <HStack>
       {platforms.map((platform) => (
         <Icon
           key={platform.id}
           boxSize="14px"
-          as={iconMap[platform.slug]}
+          as={platformIconMap[platform.slug]}
         ></Icon>
       ))}
     </HStack>

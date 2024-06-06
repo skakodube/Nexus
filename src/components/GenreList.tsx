@@ -4,7 +4,8 @@ import {
   ListItem,
   Image,
   SkeletonText,
-  Button,
+  Box,
+  Text,
 } from "@chakra-ui/react";
 import useGenres, { Genre } from "../hooks/useGenres";
 import { useState } from "react";
@@ -25,25 +26,31 @@ const GenreList = ({ selectedGenre, onSelectGenre }: Props) => {
     <List>
       {isLoading && <SkeletonText />}
       {displayedGenres.map((genre) => (
-        <ListItem key={genre.id} paddingY="4px">
-          <HStack>
-            <Image
-              borderRadius={8}
-              boxSize="32px"
-              src={genre.image_background}
-            ></Image>
-            <Button
-              fontWeight={genre.id === selectedGenre?.id ? "bold" : "normal"}
-              onClick={() => onSelectGenre(genre)}
-              variant="link"
-            >
-              {genre.name}
-            </Button>
-          </HStack>
+        <ListItem key={genre.id} paddingY="1px">
+          <Box
+            w={"100%"}
+            onClick={() => onSelectGenre(genre)}
+            as="button"
+            role="group"
+            cursor="pointer"
+          >
+            <HStack>
+              <Image
+                borderRadius={6}
+                boxSize="32px"
+                src={genre.image_background}
+              ></Image>
+              <Text
+                fontWeight={genre.id === selectedGenre?.id ? "bold" : "normal"}
+              >
+                {genre.name}
+              </Text>
+            </HStack>
+          </Box>
         </ListItem>
       ))}
 
-      <ListItem>
+      <ListItem paddingY="1px">
         <ExtendList showAll={showAll} setShowAll={() => setShowAll(!showAll)} />
       </ListItem>
     </List>
