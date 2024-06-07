@@ -5,6 +5,7 @@ export interface Platform {
   name: string;
   slug: string;
   image_background: string;
+  description: string;
 }
 
 const usePlatforms = () => useData<Platform>("/platforms");
