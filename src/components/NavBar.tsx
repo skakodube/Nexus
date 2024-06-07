@@ -1,7 +1,7 @@
-import { Box, HStack, Image } from "@chakra-ui/react";
-import logo from "../assets/logo.webp";
+import { Box, HStack, Icon, Image } from "@chakra-ui/react";
 import ColorModeSwitch from "./ColorModeSwitch";
 import InputSearch from "./InputSearch";
+import { RiGamepadLine } from "react-icons/ri";
 
 interface Props {
   onSearch: (search: string) => void;
@@ -9,8 +9,13 @@ interface Props {
 
 const NavBar = ({ onSearch }: Props) => {
   return (
-    <HStack>
-      <Image src={logo} boxSize={"60px"}></Image>
+    <HStack paddingY={7}>
+      <Icon
+        cursor={"pointer"}
+        boxSize={"38px"}
+        as={RiGamepadLine}
+        mr={6}
+      ></Icon>
       <InputSearch onSearch={onSearch}></InputSearch>
       <Box display={{ base: "none", lg: "block" }}>
         <ColorModeSwitch />

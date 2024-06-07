@@ -16,12 +16,14 @@ const GameHeading = ({ gameQuery, onSelectTag }: Props) => {
   const { data: platform } = usePlatformById(gameQuery, gameQuery.platform!);
   const { data: genre } = useGenreById(gameQuery, gameQuery.genre!);
 
-  const heading = `${platform?.name || ""} ${genre?.name || ""} Games`;
-
+  const heading =
+    platform?.name || genre?.name
+      ? `${platform?.name || ""} ${genre?.name || ""} Games`.trim()
+      : "All Games";
   const description = platform?.description || genre?.description || "";
 
   return (
-    <Box paddingY={10}>
+    <Box mb={10}>
       <Heading as={"h1"} fontSize={"7xl"} mb={2}>
         {heading}
       </Heading>

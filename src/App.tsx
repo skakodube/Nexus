@@ -47,7 +47,7 @@ function App() {
         />
       </GridItem>
       <Show above="lg">
-        <GridItem area={"aside"} w="210px" paddingRight={10}>
+        <GridItem area={"aside"} w="225px" paddingRight={10} paddingY={10}>
           <Box mb={5} onClick={() => setGameQuery({} as GameQuery)}>
             <Button
               variant="link"
@@ -57,7 +57,7 @@ function App() {
               color={color}
               _hover={{ color: hoverColor }}
             >
-              All Games
+              Home
             </Button>
           </Box>
           <Box mb={5}>
