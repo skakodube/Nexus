@@ -33,11 +33,9 @@ const GameHeading = ({ gameQuery, onSelectTag }: Props) => {
           />
         </Box>
       )}
-      {description && (
-        <Box>
-          <TagBar onSelectTag={onSelectTag} />
-        </Box>
-      )}
+      <Box>
+        <TagBar onSelectTag={onSelectTag} />
+      </Box>
     </Box>
   );
 };
