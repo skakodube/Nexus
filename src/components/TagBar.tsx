@@ -1,25 +1,33 @@
-import { Button, HStack, Text } from "@chakra-ui/react";
-import useTags from "../hooks/useTags";
+import { Box, Button, HStack, Text, Wrap, WrapItem } from "@chakra-ui/react";
+import useTags, { Tag } from "../hooks/useTags";
+import { useState } from "react";
 
-const TagBar = () => {
+interface Props {
+  onSelectTag: (tag: Tag) => void;
+}
+
+const TagBar = ({ onSelectTag }: Props) => {
   const { data: tags } = useTags();
 
   return (
-    <HStack>
+    <Wrap align={"center"}>
       <Text fontWeight="normal" color="gray.400">
         Related tags:
       </Text>
       {tags.map((tag) => (
-        <Button
-          fontWeight="normal"
-          fontSize="14px"
-          color="gray.400"
-          borderRadius={50}
-        >
-          {tag.name}
-        </Button>
+        <WrapItem key={tag.id}>
+          <Button
+            onClick={() => onSelectTag(tag)}
+            fontWeight="normal"
+            fontSize="14px"
+            color="gray.400"
+            borderRadius={50}
+          >
+            {tag.name}
+          </Button>
+        </WrapItem>
       ))}
-    </HStack>
+    </Wrap>
   );
 };
 

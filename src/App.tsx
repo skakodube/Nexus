@@ -4,8 +4,9 @@ import GameGrid from "./components/GameGrid";
 import GenreList from "./components/GenreList";
 import { useState } from "react";
 import { Genre } from "./hooks/useGenres";
-import PlatformList from "./components/PlatformList";
 import { Platform } from "./hooks/usePlatforms";
+import { Tag } from "./hooks/useTags";
+import PlatformList from "./components/PlatformList";
 import SortSelector from "./components/SortSelector";
 import PlatformSelector from "./components/PlatformSelector";
 import GameHeading from "./components/GameHeading";
@@ -13,6 +14,7 @@ import GameHeading from "./components/GameHeading";
 export interface GameQuery {
   genre: Genre | null;
   platform: Platform | null;
+  tag: Tag | null;
   sortOrder: string;
   searchText: string;
 }
@@ -57,7 +59,10 @@ function App() {
         </GridItem>
       </Show>
       <GridItem area={"main"}>
-        <GameHeading gameQuery={gameQuery} />
+        <GameHeading
+          gameQuery={gameQuery}
+          onSelectTag={(tag) => setGameQuery({ ...gameQuery, tag })}
+        />
         <HStack mb={4}>
           <SortSelector
             selectedSortOrder={gameQuery.sortOrder}

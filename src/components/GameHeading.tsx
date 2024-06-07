@@ -5,12 +5,14 @@ import useGenreById from "../hooks/useGenreById";
 import { stripHtmlWithRegex } from "../services/html-remove";
 import CollapsibleTextBox from "./CollapsibleTextBox";
 import TagBar from "./TagBar";
+import { Tag } from "../hooks/useTags";
 
 interface Props {
   gameQuery: GameQuery;
+  onSelectTag: (tag: Tag) => void;
 }
 
-const GameHeading = ({ gameQuery }: Props) => {
+const GameHeading = ({ gameQuery, onSelectTag }: Props) => {
   const { data: platform } = usePlatformById(gameQuery, gameQuery.platform!);
   const { data: genre } = useGenreById(gameQuery, gameQuery.genre!);
 
@@ -33,7 +35,7 @@ const GameHeading = ({ gameQuery }: Props) => {
       )}
       {description && (
         <Box>
-          <TagBar />
+          <TagBar onSelectTag={onSelectTag} />
         </Box>
       )}
     </Box>
