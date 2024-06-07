@@ -39,6 +39,7 @@ const GenreList = ({ selectedGenre, onSelectGenre }: Props) => {
                 borderRadius={6}
                 boxSize="32px"
                 src={genre.image_background}
+                objectFit="cover"
               ></Image>
               <Text
                 whiteSpace={"nowrap"}
