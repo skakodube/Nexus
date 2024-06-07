@@ -13,6 +13,8 @@ const GameGrid = ({ gameQuery }: Props) => {
   const { data: games, error, isLoading } = useGames(gameQuery);
   const skeletons = Array.from({ length: 12 }, (_, index) => index + 1);
 
+  if (error) return <Text>{error}</Text>;
+
   const columns = { base: 1, md: 2, lg: 3, xl: 4 };
   const currentColumns = useBreakpointValue(columns) ?? 1;
 
@@ -35,26 +37,23 @@ const GameGrid = ({ gameQuery }: Props) => {
   const distributedCards = cardDistribute(games || []);
 
   return (
-    <>
-      {error && <Text>{error}</Text>}
-      <SimpleGrid columns={columns} spacing={6}>
-        {isLoading &&
-          skeletons.map((skeleton) => (
-            <GameCardContainer key={skeleton}>
-              <GameCardSkeleton />
-            </GameCardContainer>
-          ))}
+    <SimpleGrid columns={columns} spacing={6}>
+      {isLoading &&
+        skeletons.map((skeleton) => (
+          <GameCardContainer key={skeleton}>
+            <GameCardSkeleton />
+          </GameCardContainer>
+        ))}
 
-        {games &&
-          Array.from({ length: currentColumns }, (_, index) => (
-            <Box key={index}>
-              {distributedCards.filter(
-                (_, cardIndex) => cardIndex % currentColumns === index
-              )}
-            </Box>
-          ))}
-      </SimpleGrid>
-    </>
+      {games &&
+        Array.from({ length: currentColumns }, (_, index) => (
+          <Box key={index}>
+            {distributedCards.filter(
+              (_, cardIndex) => cardIndex % currentColumns === index
+            )}
+          </Box>
+        ))}
+    </SimpleGrid>
   );
 };
 
