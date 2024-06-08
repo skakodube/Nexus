@@ -16,14 +16,14 @@ const GameHeading = ({ gameQuery, onSelectTag }: Props) => {
   const { data: platform } = usePlatformById(gameQuery, gameQuery.platform!);
   const { data: genre } = useGenreById(gameQuery, gameQuery.genre!);
 
-  const heading =
-    platform?.name || genre?.name
-      ? `${platform?.name || ""} ${genre?.name || ""} Games`.trim()
-      : "All Games";
+  const anySelected = platform?.name || genre?.name;
+  const heading = anySelected
+    ? `${platform?.name || ""} ${genre?.name || ""} Games`.trim()
+    : "All Games";
   const description = platform?.description || genre?.description || "";
 
   return (
-    <Box mb={10}>
+    <Box mb={3}>
       <Heading
         as="h1"
         color="white"
@@ -40,9 +40,11 @@ const GameHeading = ({ gameQuery, onSelectTag }: Props) => {
           />
         </Box>
       )}
-      <Box>
-        <TagBar onSelectTag={onSelectTag} />
-      </Box>
+      {anySelected && (
+        <Box mb={9}>
+          <TagBar onSelectTag={onSelectTag} />
+        </Box>
+      )}
     </Box>
   );
 };

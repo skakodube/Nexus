@@ -7,7 +7,7 @@ interface Props {
   selected: boolean;
 }
 
-const ListOption = ({ id, image, name, selected }: Props) => {
+const ListOption = ({ image, name, selected }: Props) => {
   const defaultColor = useColorModeValue("gray.700", "white");
   const activeColor = useColorModeValue("white", "black");
   const defaultBg = useColorModeValue("gray.200", "gray.700");
