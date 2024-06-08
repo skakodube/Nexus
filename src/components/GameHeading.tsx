@@ -24,7 +24,12 @@ const GameHeading = ({ gameQuery, onSelectTag }: Props) => {
 
   return (
     <Box mb={10}>
-      <Heading as={"h1"} fontSize={"7xl"} mb={2}>
+      <Heading
+        as="h1"
+        color="white"
+        fontSize={{ base: "5xl", sm: "6xl", md: "7xl" }}
+        mb={2}
+      >
         {heading}
       </Heading>
       {description && (

@@ -9,18 +9,18 @@ const TagBar = ({ onSelectTag }: Props) => {
   const { data: tags } = useTags();
 
   return (
-    <Wrap align={"center"}>
+    <Wrap align={"center"} display={{ base: "none", md: "block" }}>
       <Text fontWeight="normal" color="gray.400">
         Related tags:
       </Text>
       {tags.map((tag) => (
         <WrapItem key={tag.id}>
           <Button
-            onClick={() => onSelectTag(tag)}
-            fontWeight="normal"
-            fontSize="14px"
-            color="gray.400"
             borderRadius={50}
+            color="gray.500"
+            fontSize="14px"
+            fontWeight="normal"
+            onClick={() => onSelectTag(tag)}
           >
             {tag.name}
           </Button>

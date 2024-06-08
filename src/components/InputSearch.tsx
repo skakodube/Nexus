@@ -32,8 +32,23 @@ const InputSearch = ({ onSearch }: Props) => {
           color={"gray.500"}
           display={{ base: "none", sm: "flex" }}
         >
-          <Icon as={Search2Icon} boxSize="15px"></Icon>
+          <Icon as={Search2Icon} boxSize="15px" />
         </InputLeftElement>
+
+        <Input
+          _groupHover={{ bg: bgColorActive }}
+          bg={bgColor}
+          ref={ref}
+          borderRadius={20}
+          placeholder="Search games"
+          _placeholder={{
+            opacity: 0.7,
+            color: "gray.500",
+            _groupHover: { color: "black" },
+          }}
+          variant={"filled"}
+        ></Input>
+
         <InputRightElement mr={9} display={{ base: "none", md: "flex" }}>
           <Box
             mr={1}
@@ -47,7 +62,7 @@ const InputSearch = ({ onSearch }: Props) => {
           >
             alt
           </Box>
-          <Text fontSize="12px" fontFamily="monospace" color={"gray.500"}>
+          <Text fontSize="12px" as="kbd" color={"gray.500"}>
             +
           </Text>
           <Box
@@ -63,19 +78,6 @@ const InputSearch = ({ onSearch }: Props) => {
             enter
           </Box>
         </InputRightElement>
-        <Input
-          _groupHover={{ bg: bgColorActive }}
-          bg={bgColor}
-          ref={ref}
-          borderRadius={20}
-          placeholder="Search games"
-          _placeholder={{
-            opacity: 0.7,
-            color: "gray.500",
-            _groupHover: { color: "black" },
-          }}
-          variant={"filled"}
-        ></Input>
       </InputGroup>
     </form>
   );

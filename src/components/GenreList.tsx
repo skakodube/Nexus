@@ -28,22 +28,22 @@ const GenreList = ({ selectedGenre, onSelectGenre }: Props) => {
       {displayedGenres.map((genre) => (
         <ListItem key={genre.id} paddingY="1px">
           <Box
-            w={"100%"}
-            onClick={() => onSelectGenre(genre)}
             as="button"
-            role="group"
             cursor="pointer"
+            onClick={() => onSelectGenre(genre)}
+            role="group"
+            w="100%"
           >
             <HStack>
               <Image
                 borderRadius={6}
                 boxSize="32px"
-                src={genre.image_background}
                 objectFit="cover"
+                src={genre.image_background}
               ></Image>
               <Text
-                whiteSpace={"nowrap"}
                 fontWeight={genre.id === selectedGenre?.id ? "bold" : "normal"}
+                whiteSpace="nowrap"
               >
                 {genre.name}
               </Text>

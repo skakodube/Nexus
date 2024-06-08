@@ -30,9 +30,9 @@ const SortSelector = ({ selectedSortOrder, onSelectSortOrder }: Props) => {
   return (
     <Menu>
       <MenuButton
+        as={Button}
         fontSize={"sm"}
         fontWeight={"normal"}
-        as={Button}
         rightIcon={<ChevronDownIcon color={"gray.500"} boxSize={6} mt={1} />}
       >
         Order by:{" "}
@@ -43,9 +43,9 @@ const SortSelector = ({ selectedSortOrder, onSelectSortOrder }: Props) => {
       <MenuList>
         {sortOrders.map((order) => (
           <MenuItem
+            key={order.value}
             onClick={() => onSelectSortOrder(order.value)}
             value={order.value}
-            key={order.value}
           >
             {order.label}
           </MenuItem>

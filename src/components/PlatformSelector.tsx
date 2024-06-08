@@ -23,23 +23,23 @@ const PlatformSelector = ({ selectedPlatform, onSelectPlatform }: Props) => {
     <Menu>
       {selectedPlatform ? (
         <MenuButton
+          as={Button}
           bg={focusBg}
           color={focusColor}
-          fontSize={"sm"}
-          fontWeight={"normal"}
-          as={Button}
+          fontSize="sm"
+          fontWeight="normal"
           rightIcon={<ChevronDownIcon color={focusIcon} boxSize={6} mt={1} />}
         >
           {selectedPlatform.name}
         </MenuButton>
       ) : (
         <MenuButton
-          fontSize={"sm"}
-          fontWeight={"normal"}
           as={Button}
+          fontSize="sm"
+          fontWeight="normal"
           rightIcon={<ChevronDownIcon color={"gray.500"} boxSize={6} mt={1} />}
         >
-          {"Platforms"}
+          Platforms
         </MenuButton>
       )}
       <MenuList>

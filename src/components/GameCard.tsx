@@ -32,39 +32,43 @@ const GameCard = ({ game, wide }: Props) => {
   };
 
   return (
-    <Card overflow={"hidden"} borderRadius={10}>
+    <Card overflow="hidden" borderRadius={10}>
       <Image src={getCroppedImageUrl(game.background_image) || noImage}></Image>
+
       <CardBody>
         <HStack mb={2} justifyContent="space-between">
           <PlatformIconList
             platforms={game.parent_platforms.map((p) => p.platform)}
           ></PlatformIconList>
-          {!wide && <CriticScore score={game.metacritic}></CriticScore>}{" "}
+          {!wide && <CriticScore score={game.metacritic}></CriticScore>}
         </HStack>
-        <Heading fontSize={"2xl"}>
+
+        <Heading fontSize="2xl">
           {game.name + "  "}
           <Emoji rating={game.rating_top} />
         </Heading>
+
         <Button
           marginY={2}
-          fontSize={"12px"}
-          borderRadius={"4px"}
-          paddingX={"10px"}
-          height={"24px"}
+          fontSize="12px"
+          borderRadius="4px"
+          paddingX="10px"
+          height="24px"
         >
-          <Icon as={FaPlus} mr={1} boxSize={"12px"} />
+          <Icon as={FaPlus} mr={1} boxSize="12px" />
           {game.added.toLocaleString()}
         </Button>
+
         {wide && (
           <HStack spacing={6} paddingY={5}>
-            <Box fontSize={"sm"} display={"flex"} alignItems="center">
-              <Text m={2} color={"gray.500"}>
+            <Box fontSize="sm" display="flex" alignItems="center">
+              <Text mr={2} color={"gray.500"}>
                 Metacritic:
               </Text>
               <CriticScore score={game.metacritic}></CriticScore>
             </Box>
-            <Box fontSize={"sm"} display={"flex"}>
-              <Text color={"gray.500"}>Release Date:</Text>
+            <Box fontSize="sm" display="flex">
+              <Text color="gray.500">Release Date:</Text>
               <Text ml={2}>{dateFormat(game.released)}</Text>
             </Box>
           </HStack>

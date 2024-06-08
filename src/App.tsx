@@ -32,7 +32,7 @@ export interface GameQuery {
 function App() {
   const color = useColorModeValue("black", "white");
   const hoverColor = useColorModeValue("gray.600", "gray.400");
-  const [columnDisplay, setColumnDisplay] = useState(true);
+  const [columnDisplay, setColumnDisplay] = useState(false);
 
   const [gameQuery, setGameQuery] = useState<GameQuery>({} as GameQuery);
   return (
@@ -51,7 +51,7 @@ function App() {
       </GridItem>
 
       <Show above="lg">
-        <GridItem area={"aside"}>
+        <GridItem my={10} area={"aside"}>
           <Box mb={5} onClick={() => setGameQuery({} as GameQuery)}>
             <Button
               variant="link"
