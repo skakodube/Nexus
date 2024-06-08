@@ -1,6 +1,5 @@
-import { Box, Button, HStack, Text, Wrap, WrapItem } from "@chakra-ui/react";
+import { Button, Text, Wrap, WrapItem } from "@chakra-ui/react";
 import useTags, { Tag } from "../hooks/useTags";
-import { useState } from "react";
 
 interface Props {
   onSelectTag: (tag: Tag) => void;

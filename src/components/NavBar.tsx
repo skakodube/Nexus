@@ -1,4 +1,4 @@
-import { Box, HStack, Icon, Image } from "@chakra-ui/react";
+import { Box, HStack, Icon } from "@chakra-ui/react";
 import ColorModeSwitch from "./ColorModeSwitch";
 import InputSearch from "./InputSearch";
 import { RiGamepadLine } from "react-icons/ri";

@@ -19,6 +19,7 @@ import PlatformList from "./components/PlatformList";
 import SortSelector from "./components/SortSelector";
 import PlatformSelector from "./components/PlatformSelector";
 import GameHeading from "./components/GameHeading";
+import DisplaySelector from "./components/DisplaySelector";
 
 export interface GameQuery {
   genre: Genre | null;
@@ -31,6 +32,7 @@ export interface GameQuery {
 function App() {
   const color = useColorModeValue("black", "white");
   const hoverColor = useColorModeValue("gray.600", "gray.400");
+  const [columnDisplay, setColumnDisplay] = useState(true);
 
   const [gameQuery, setGameQuery] = useState<GameQuery>({} as GameQuery);
   return (
@@ -40,14 +42,16 @@ function App() {
         base: `"nav" "main"`,
         lg: `"nav nav" "aside main"`,
       }}
+      gridTemplateColumns={{ base: "1fr", lg: "220px 1fr" }}
     >
       <GridItem area={"nav"}>
         <NavBar
           onSearch={(searchText) => setGameQuery({ ...gameQuery, searchText })}
         />
       </GridItem>
+
       <Show above="lg">
-        <GridItem area={"aside"} w="225px" paddingRight={10} paddingY={10}>
+        <GridItem area={"aside"}>
           <Box mb={5} onClick={() => setGameQuery({} as GameQuery)}>
             <Button
               variant="link"
@@ -87,21 +91,29 @@ function App() {
           gameQuery={gameQuery}
           onSelectTag={(tag) => setGameQuery({ ...gameQuery, tag })}
         />
-        <HStack mb={4}>
-          <SortSelector
-            selectedSortOrder={gameQuery.sortOrder}
-            onSelectSortOrder={(sortOrder) =>
-              setGameQuery({ ...gameQuery, sortOrder })
-            }
-          />
-          <PlatformSelector
-            selectedPlatform={gameQuery.platform}
-            onSelectPlatform={(platform) =>
-              setGameQuery({ ...gameQuery, platform })
+        <HStack mb={4} justifyContent="space-between" w={"100%"}>
+          <HStack spacing={2}>
+            <SortSelector
+              selectedSortOrder={gameQuery.sortOrder}
+              onSelectSortOrder={(sortOrder) =>
+                setGameQuery({ ...gameQuery, sortOrder })
+              }
+            />
+            <PlatformSelector
+              selectedPlatform={gameQuery.platform}
+              onSelectPlatform={(platform) =>
+                setGameQuery({ ...gameQuery, platform })
+              }
+            />
+          </HStack>
+          <DisplaySelector
+            columnDisplay={columnDisplay}
+            setColumnDisplay={(columnDisplay) =>
+              setColumnDisplay(columnDisplay)
             }
           />
         </HStack>
-        <GameGrid gameQuery={gameQuery} />
+        <GameGrid columnDisplay={columnDisplay} gameQuery={gameQuery} />
       </GridItem>
     </Grid>
   );

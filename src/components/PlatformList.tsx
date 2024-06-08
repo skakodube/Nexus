@@ -1,16 +1,8 @@
 import { FaGamepad } from "react-icons/fa";
+import { Box, List, ListItem, SkeletonText } from "@chakra-ui/react";
 import usePlatforms, { Platform } from "../hooks/usePlatforms";
 import { platformIconMap } from "./PlatformIconList";
-import {
-  Box,
-  HStack,
-  List,
-  ListItem,
-  SkeletonText,
-  Text,
-  Icon,
-  useColorModeValue,
-} from "@chakra-ui/react";
+import ListOption from "./ListOption";
 
 interface Props {
   onSelectPlatform: (platform: Platform) => void;
@@ -27,11 +19,6 @@ const mainPlatforms = [
 ];
 
 const PlatformList = ({ onSelectPlatform, selectedPlatform }: Props) => {
-  const defaultColor = useColorModeValue("gray.500", "gray.300");
-  const iconColor = useColorModeValue("white", "black");
-  const defaultBg = useColorModeValue("gray.200", "gray.700");
-  const hoverBg = useColorModeValue("gray.500", "white");
-
   const { data: platforms, isLoading } = usePlatforms();
 
   //  Can't fetch data from API using slug/name of platform
@@ -51,47 +38,25 @@ const PlatformList = ({ onSelectPlatform, selectedPlatform }: Props) => {
   return (
     <List>
       {isLoading && <SkeletonText />}
-      {filteredPlatforms.map((platform) => (
-        <ListItem key={platform.id} paddingY="3px">
-          <Box
-            w="100%"
-            onClick={() => onSelectPlatform(platform)}
-            as="button"
-            role="group"
-            cursor="pointer"
-          >
-            <HStack>
-              <Box
-                _groupHover={{ bg: hoverBg }}
-                display="flex"
-                justifyContent="center"
-                alignItems="center"
-                boxSize="32px"
-                borderRadius={6}
-                bg={platform.id === selectedPlatform?.id ? hoverBg : defaultBg}
-              >
-                <Icon
-                  _groupHover={{ color: iconColor }}
-                  color={
-                    platform.id === selectedPlatform?.id
-                      ? iconColor
-                      : defaultColor
-                  }
-                  boxSize={5}
-                  as={matchPlatformIcon(platform.slug)}
-                />
-              </Box>
-              <Text
-                fontWeight={
-                  platform.id === selectedPlatform?.id ? "bold" : "normal"
-                }
-              >
-                {platform.name}
-              </Text>
-            </HStack>
-          </Box>
-        </ListItem>
-      ))}
+      {platforms &&
+        filteredPlatforms.map((platform) => (
+          <ListItem key={platform.id} paddingY="3px">
+            <Box
+              as="button"
+              cursor="pointer"
+              onClick={() => onSelectPlatform(platform)}
+              role="group"
+              w="100%"
+            >
+              <ListOption
+                id={platform.id}
+                name={platform.name}
+                image={matchPlatformIcon(platform.slug)}
+                selected={platform?.id == selectedPlatform?.id}
+              ></ListOption>
+            </Box>
+          </ListItem>
+        ))}
     </List>
   );
 };

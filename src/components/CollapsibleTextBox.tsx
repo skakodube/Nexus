@@ -1,4 +1,4 @@
-import { Box, Button, useColorModeValue } from "@chakra-ui/react";
+import { Button, useColorModeValue } from "@chakra-ui/react";
 import { useState } from "react";
 
 interface Props {

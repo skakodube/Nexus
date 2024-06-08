@@ -4,7 +4,7 @@ const ColorModeSwitch = () => {
   const { colorMode, toggleColorMode } = useColorMode();
   return (
     <HStack paddingX={"20px"}>
-      <Switch colorScheme="green" onChange={toggleColorMode} />
+      <Switch colorScheme="blue" size={"md"} onChange={toggleColorMode} />
       <Text>{colorMode === "light" ? "Light" : "Dark"}</Text>
     </HStack>
   );

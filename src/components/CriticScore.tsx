@@ -12,6 +12,10 @@ const CriticScore = ({ score }: Props) => {
       borderRadius="4px"
       paddingX={2}
       colorScheme={color}
+      display="flex"
+      alignItems="center"
+      justifyContent="center"
+      maxH={"20px"}
     >
       {score}
     </Badge>
