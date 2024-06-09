@@ -8,6 +8,7 @@ import {
   Icon,
   Image,
   Text,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import { Game } from "../hooks/useGames";
 import PlatformIconList from "./PlatformIconList";
@@ -23,6 +24,9 @@ interface Props {
 }
 
 const GameCard = ({ game, wide }: Props) => {
+  const cardBg = useColorModeValue("gray.100", "gray.700");
+  const buttonBg = useColorModeValue("gray.200", "#2d2d2d");
+
   const dateFormat = (dateString: string) => {
     return new Date(dateString).toLocaleDateString("en-US", {
       year: "numeric",
@@ -32,7 +36,7 @@ const GameCard = ({ game, wide }: Props) => {
   };
 
   return (
-    <Card overflow="hidden" borderRadius={10}>
+    <Card overflow="hidden" borderRadius={10} bg={cardBg}>
       <Image src={getCroppedImageUrl(game.background_image) || noImage}></Image>
 
       <CardBody>
@@ -54,6 +58,7 @@ const GameCard = ({ game, wide }: Props) => {
           borderRadius="4px"
           paddingX="10px"
           height="24px"
+          bg={buttonBg}
         >
           <Icon as={FaPlus} mr={1} boxSize="12px" />
           {game.added.toLocaleString()}
