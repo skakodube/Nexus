@@ -15,7 +15,7 @@ Nexus is a personal project aimed at replicating the core features and design of
 
 
 <p align="center">
-  <img src="https://www.dropbox.com/scl/fi/d0ekwc3cguh1rssqkp5hc/Apex_1717893509920.png?rlkey=e1xbmub35flgc1oihy5zimxhl&st=4zjo4kf3&raw=1" alt="App Screenshot 1" width="65,2%">
+  <img src="https://www.dropbox.com/scl/fi/d0ekwc3cguh1rssqkp5hc/Apex_1717893509920.png?rlkey=e1xbmub35flgc1oihy5zimxhl&st=4zjo4kf3&raw=1" alt="App Screenshot 1" width="65%">
   <img src="https://www.dropbox.com/scl/fi/bhtyzcl271tohglyw2a30/Apex_1717893512029.png?rlkey=sdtpqvcx8fh7iycsfy5hjwvzf&st=nu7vxkk6&raw=1" alt="App Screenshot 2" width="24%">
 </p>
 
