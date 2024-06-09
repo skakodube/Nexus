@@ -19,6 +19,8 @@ const InputSearch = ({ onSearch }: Props) => {
   const ref = useRef<HTMLInputElement>(null);
   const bgColor = useColorModeValue("gray.100", "#3b3b3b");
   const bgColorActive = useColorModeValue("gray.200", "white");
+  const color = useColorModeValue("gray.700", "white");
+  const colorActive = useColorModeValue("black", "black");
 
   return (
     <form
@@ -36,9 +38,10 @@ const InputSearch = ({ onSearch }: Props) => {
         </InputLeftElement>
 
         <Input
-          _groupHover={{ bg: bgColorActive }}
+          _groupHover={{ bg: bgColorActive, color: colorActive }}
           bg={bgColor}
           ref={ref}
+          color={color}
           borderRadius={20}
           placeholder="Search games"
           _placeholder={{

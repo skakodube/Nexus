@@ -33,7 +33,14 @@ const SortSelector = ({ selectedSortOrder, onSelectSortOrder }: Props) => {
         as={Button}
         fontSize={"sm"}
         fontWeight={"normal"}
-        rightIcon={<ChevronDownIcon color={"gray.500"} boxSize={6} mt={1} />}
+        rightIcon={
+          <ChevronDownIcon
+            display={{ base: "none", sm: "block" }}
+            color={"gray.500"}
+            boxSize={6}
+            mt={1}
+          />
+        }
       >
         Order by:{" "}
         <Box fontWeight={"bold"} as="span">

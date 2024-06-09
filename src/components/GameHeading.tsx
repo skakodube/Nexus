@@ -24,11 +24,11 @@ const GameHeading = ({ gameQuery, onSelectTag }: Props) => {
 
   return (
     <Box mb={3}>
-      <Heading as="h1" fontSize={{ base: "5xl", sm: "6xl", md: "7xl" }} mb={2}>
+      <Heading as="h1" fontSize={{ base: "4xl", sm: "6xl", md: "7xl" }} mb={2}>
         {heading}
       </Heading>
       {description && (
-        <Box mb={4}>
+        <Box mb={4} display={{ base: "none", sm: "block" }}>
           <CollapsibleTextBox
             text={stripHtmlWithRegex(description)}
             charLimit={650}
