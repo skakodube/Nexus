@@ -2,14 +2,16 @@ import {
   Box,
   Center,
   SimpleGrid,
-  Text,
+  Spinner,
   useBreakpointValue,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import useGames, { Game } from "../hooks/useGames";
 import GameCard from "./GameCard";
 import GameCardSkeleton from "./GameCardSkeleton";
 import GameCardContainer from "./GameCardContainer";
 import { GameQuery } from "../App";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 interface Props {
   gameQuery: GameQuery;
@@ -17,22 +19,33 @@ interface Props {
 }
 
 const GameGrid = ({ gameQuery, columnDisplay }: Props) => {
-  const { data: games, error, isLoading } = useGames(gameQuery);
-  const skeletons = Array.from({ length: 12 }, (_, index) => index + 1);
+  const spinnerBgColor = useColorModeValue("gray.200", "gray.700");
+  const spinnerColor = useColorModeValue("gray.400", "gray.600");
 
-  if (error) return <Text>{error}</Text>;
+  const { data, isLoading, isFetchingNextPage, fetchNextPage, hasNextPage } =
+    useGames(gameQuery);
+  const skeletons = Array.from({ length: 12 }, (_, index) => index + 1);
 
   const columns = columnDisplay
     ? { base: 1 }
     : { base: 1, md: 2, lg: 3, xl: 4 };
   const currentColumns = useBreakpointValue(columns) ?? 1;
 
-  const cardDistribute = (games: Game[]): JSX.Element[] => {
-    const distributedCards: JSX.Element[] = [];
+  const fetchedGamesCount =
+    data?.pages.reduce((total, page) => total + page.results.length, 0) || 0;
 
-    games.forEach((game) => {
-      distributedCards.push(
-        <Box key={game.id} mb={6}>
+  const distributeCardsEvenly = (games: Game[], columns: number) => {
+    // Create an array for each column
+    const columnArrays: JSX.Element[][] = Array.from(
+      { length: columns },
+      () => []
+    );
+
+    // Distribute cards into columns
+    games.forEach((game, index) => {
+      const columnIndex = index % columns; // Determine the column index using modulo
+      columnArrays[columnIndex].push(
+        <Box mb={6}>
           <GameCardContainer key={game.id}>
             <GameCard game={game} wide={columnDisplay} />
           </GameCardContainer>
@@ -40,39 +53,48 @@ const GameGrid = ({ gameQuery, columnDisplay }: Props) => {
       );
     });
 
-    return distributedCards;
+    return columnArrays;
   };
 
-  const distributedCards = cardDistribute(games || []);
+  // Gather all games from the fetched pages
+  const allGames = data?.pages.flatMap((page) => page.results) || [];
+
+  // Distribute all the fetched games into columns
+  const distributedCards = distributeCardsEvenly(allGames, currentColumns);
 
   return (
-    <SimpleGrid columns={columns} spacing={6}>
-      {isLoading &&
-        skeletons.map((skeleton) => (
-          <GameCardContainer key={skeleton}>
-            <GameCardSkeleton />
-          </GameCardContainer>
-        ))}
-
-      {games &&
-        Array.from({ length: currentColumns }, (_, index) =>
-          columnDisplay ? (
-            <Center>
-              <Box key={index}>
-                {distributedCards.filter(
-                  (_, cardIndex) => cardIndex % currentColumns === index
-                )}
-              </Box>
-            </Center>
-          ) : (
-            <Box key={index}>
-              {distributedCards.filter(
-                (_, cardIndex) => cardIndex % currentColumns === index
-              )}
-            </Box>
-          )
+    <InfiniteScroll
+      dataLength={fetchedGamesCount}
+      hasMore={!!hasNextPage}
+      next={() => fetchNextPage()}
+      loader={
+        <Center>
+          <Box bg={spinnerBgColor} mb={3} padding={"8px 60px"} borderRadius={6}>
+            <Spinner color={spinnerColor} mt={1} />
+          </Box>
+        </Center>
+      }
+    >
+      <SimpleGrid columns={currentColumns} spacing={6}>
+        {isLoading &&
+          skeletons.map((skeleton) => (
+            <GameCardContainer key={skeleton}>
+              <GameCardSkeleton />
+            </GameCardContainer>
+          ))}
+        {columnDisplay ? (
+          <Center>
+            {distributedCards.map((column, columnIndex) => (
+              <Box key={columnIndex}>{column}</Box>
+            ))}
+          </Center>
+        ) : (
+          distributedCards.map((column, columnIndex) => (
+            <Box key={columnIndex}>{column}</Box>
+          ))
         )}
-    </SimpleGrid>
+      </SimpleGrid>
+    </InfiniteScroll>
   );
 };
 

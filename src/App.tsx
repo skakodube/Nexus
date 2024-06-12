@@ -12,8 +12,6 @@ import NavBar from "./components/NavBar";
 import GameGrid from "./components/GameGrid";
 import GenreList from "./components/GenreList";
 import { useState } from "react";
-import { Genre } from "./hooks/useGenres";
-import { Platform } from "./hooks/usePlatforms";
 import { Tag } from "./hooks/useTags";
 import PlatformList from "./components/PlatformList";
 import SortSelector from "./components/SortSelector";
@@ -22,8 +20,8 @@ import GameHeading from "./components/GameHeading";
 import DisplaySelector from "./components/DisplaySelector";
 
 export interface GameQuery {
-  genre: Genre | null;
-  platform: Platform | null;
+  genreId?: number;
+  platformId?: number;
   tag: Tag | null;
   sortOrder: string;
   searchText: string;
@@ -69,10 +67,10 @@ function App() {
               Platforms
             </Heading>
             <PlatformList
-              onSelectPlatform={(platform) =>
-                setGameQuery({ ...gameQuery, platform })
+              onSelectPlatform={(platformId) =>
+                setGameQuery({ ...gameQuery, platformId })
               }
-              selectedPlatform={gameQuery.platform}
+              selectedPlatformId={gameQuery.platformId}
             />
           </Box>
           <Box>
@@ -80,8 +78,10 @@ function App() {
               Genres
             </Heading>
             <GenreList
-              onSelectGenre={(genre) => setGameQuery({ ...gameQuery, genre })}
-              selectedGenre={gameQuery.genre}
+              onSelectGenre={(genreId) =>
+                setGameQuery({ ...gameQuery, genreId })
+              }
+              selectedGenreId={gameQuery.genreId}
             />
           </Box>
         </GridItem>
@@ -100,9 +100,9 @@ function App() {
               }
             />
             <PlatformSelector
-              selectedPlatform={gameQuery.platform}
-              onSelectPlatform={(platform) =>
-                setGameQuery({ ...gameQuery, platform })
+              selectedPlatformId={gameQuery.platformId}
+              onSelectPlatform={(platformId) =>
+                setGameQuery({ ...gameQuery, platformId })
               }
             />
           </HStack>

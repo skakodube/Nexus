@@ -1,11 +1,11 @@
 import { Box, Heading } from "@chakra-ui/react";
 import { GameQuery } from "../App";
-import usePlatformById from "../hooks/usePlatformById";
-import useGenreById from "../hooks/useGenreById";
 import { stripHtmlWithRegex } from "../services/html-remove";
 import CollapsibleTextBox from "./CollapsibleTextBox";
 import TagBar from "./TagBar";
 import { Tag } from "../hooks/useTags";
+import useGenre from "../hooks/useGenre";
+import usePlatform from "../hooks/usePlatform";
 
 interface Props {
   gameQuery: GameQuery;
@@ -13,13 +13,15 @@ interface Props {
 }
 
 const GameHeading = ({ gameQuery, onSelectTag }: Props) => {
-  const { data: platform } = usePlatformById(gameQuery, gameQuery.platform!);
-  const { data: genre } = useGenreById(gameQuery, gameQuery.genre!);
+  const { data: platform } = usePlatform(gameQuery?.platformId);
+  const { data: genre } = useGenre(gameQuery?.genreId);
 
   const anySelected = platform?.name || genre?.name;
+
   const heading = anySelected
     ? `${platform?.name || ""} ${genre?.name || ""} Games`.trim()
     : "All Games";
+
   const description = platform?.description || genre?.description || "";
 
   return (

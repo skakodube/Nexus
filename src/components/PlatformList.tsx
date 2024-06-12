@@ -5,8 +5,8 @@ import { platformIconMap } from "./PlatformIconList";
 import ListOption from "./ListOption";
 
 interface Props {
-  onSelectPlatform: (platform: Platform) => void;
-  selectedPlatform: Platform | null;
+  onSelectPlatform: (platformId: number) => void;
+  selectedPlatformId?: number;
 }
 
 const mainPlatforms = [
@@ -18,15 +18,15 @@ const mainPlatforms = [
   "android",
 ];
 
-const PlatformList = ({ onSelectPlatform, selectedPlatform }: Props) => {
-  const { data: platforms, isLoading } = usePlatforms();
+const PlatformList = ({ onSelectPlatform, selectedPlatformId }: Props) => {
+  const { data, isLoading } = usePlatforms();
 
   //  Can't fetch data from API using slug/name of platform
   //  Filtering platform objects by matching their name
   const filterPlatforms = (platform: Platform): boolean =>
     mainPlatforms.some((mainPlatform) => platform.slug.includes(mainPlatform));
 
-  const filteredPlatforms = platforms.filter(filterPlatforms);
+  const filteredPlatforms = data?.results.filter(filterPlatforms);
 
   const matchPlatformIcon = (platform: string) => {
     const matchingKey = Object.keys(platformIconMap).find((k) =>
@@ -38,13 +38,13 @@ const PlatformList = ({ onSelectPlatform, selectedPlatform }: Props) => {
   return (
     <List>
       {isLoading && <SkeletonText />}
-      {platforms &&
-        filteredPlatforms.map((platform) => (
+      {data?.results &&
+        filteredPlatforms?.map((platform) => (
           <ListItem key={platform.id} paddingY="3px">
             <Box
               as="button"
               cursor="pointer"
-              onClick={() => onSelectPlatform(platform)}
+              onClick={() => onSelectPlatform(platform.id)}
               role="group"
               w="100%"
             >
@@ -52,7 +52,7 @@ const PlatformList = ({ onSelectPlatform, selectedPlatform }: Props) => {
                 id={platform.id}
                 name={platform.name}
                 image={matchPlatformIcon(platform.slug)}
-                selected={platform?.id == selectedPlatform?.id}
+                selected={platform?.id == selectedPlatformId}
               ></ListOption>
             </Box>
           </ListItem>

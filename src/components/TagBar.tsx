@@ -6,14 +6,14 @@ interface Props {
 }
 
 const TagBar = ({ onSelectTag }: Props) => {
-  const { data: tags } = useTags();
+  const { data } = useTags();
 
   return (
     <Wrap align={"center"} display={{ base: "none", md: "block" }}>
       <Text fontWeight="normal" color="gray.400">
         Related tags:
       </Text>
-      {tags.map((tag) => (
+      {data?.results.map((tag) => (
         <WrapItem key={tag.id}>
           <Button
             borderRadius={50}

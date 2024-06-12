@@ -10,15 +10,20 @@ import {
 import usePlatforms, { Platform } from "../hooks/usePlatforms";
 
 interface Props {
-  selectedPlatform: Platform | null;
-  onSelectPlatform: (platform: Platform) => void;
+  selectedPlatformId?: number;
+  onSelectPlatform: (platformId: number) => void;
 }
 
-const PlatformSelector = ({ selectedPlatform, onSelectPlatform }: Props) => {
-  const { data: platforms } = usePlatforms();
+const PlatformSelector = ({ selectedPlatformId, onSelectPlatform }: Props) => {
+  const { data } = usePlatforms();
+  const selectedPlatform = data.results.find(
+    (platform) => platform.id == selectedPlatformId
+  );
+
   const focusColor = useColorModeValue("white", "gray.800");
   const focusBg = useColorModeValue("gray.500", "white");
   const focusIcon = useColorModeValue("gray.300", "gray.500");
+
   return (
     <Menu>
       {selectedPlatform ? (
@@ -43,10 +48,10 @@ const PlatformSelector = ({ selectedPlatform, onSelectPlatform }: Props) => {
         </MenuButton>
       )}
       <MenuList>
-        {platforms &&
-          platforms.map((platform) => (
+        {data?.results &&
+          data?.results.map((platform) => (
             <MenuItem
-              onClick={() => onSelectPlatform(platform)}
+              onClick={() => onSelectPlatform(platform.id)}
               key={platform.id}
             >
               {platform.name}

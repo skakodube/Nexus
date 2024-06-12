@@ -7,20 +7,20 @@ import {
   Box,
   Text,
 } from "@chakra-ui/react";
-import useGenres, { Genre } from "../hooks/useGenres";
+import useGenres from "../hooks/useGenres";
 import { useState } from "react";
 import ExtendList from "./ExtendList";
 
 interface Props {
-  onSelectGenre: (genre: Genre) => void;
-  selectedGenre: Genre | null;
+  onSelectGenre: (genreId?: number) => void;
+  selectedGenreId?: number;
 }
 
-const GenreList = ({ selectedGenre, onSelectGenre }: Props) => {
-  const { data: genres, isLoading } = useGenres();
+const GenreList = ({ selectedGenreId, onSelectGenre }: Props) => {
+  const { data, isLoading } = useGenres();
   const [showAll, setShowAll] = useState(false);
 
-  const displayedGenres = showAll ? genres : genres.slice(0, 3);
+  const displayedGenres = showAll ? data.results : data.results.slice(0, 3);
 
   return (
     <List>
@@ -30,7 +30,7 @@ const GenreList = ({ selectedGenre, onSelectGenre }: Props) => {
           <Box
             as="button"
             cursor="pointer"
-            onClick={() => onSelectGenre(genre)}
+            onClick={() => onSelectGenre(genre.id)}
             role="group"
             w="100%"
           >
@@ -42,7 +42,7 @@ const GenreList = ({ selectedGenre, onSelectGenre }: Props) => {
                 src={genre.image_background}
               ></Image>
               <Text
-                fontWeight={genre.id === selectedGenre?.id ? "bold" : "normal"}
+                fontWeight={genre.id === selectedGenreId ? "bold" : "normal"}
                 whiteSpace="nowrap"
               >
                 {genre.name}
@@ -52,7 +52,7 @@ const GenreList = ({ selectedGenre, onSelectGenre }: Props) => {
         </ListItem>
       ))}
 
-      {genres && (
+      {data.results && (
         <ListItem paddingY="1px">
           <ExtendList
             showAll={showAll}
