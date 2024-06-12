@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import ms from "ms";
 import tags from "../data/tags";
 import APIClient from "../services/apiClient";
 
@@ -14,7 +15,7 @@ const useTags = () =>
   useQuery({
     queryKey: ["tags"],
     queryFn: apiClient.getAll,
-    staleTime: 24 * 60 * 60 * 1000, //24h
+    staleTime: ms("24h"), //24h
     initialData: tags,
   });
 
