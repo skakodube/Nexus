@@ -10,15 +10,14 @@ import {
 import useGenres from "../hooks/useGenres";
 import { useState } from "react";
 import ExtendList from "./ExtendList";
+import useGameQueryStore from "../store";
 
-interface Props {
-  onSelectGenre: (genreId?: number) => void;
-  selectedGenreId?: number;
-}
-
-const GenreList = ({ selectedGenreId, onSelectGenre }: Props) => {
+const GenreList = () => {
   const { data, isLoading } = useGenres();
   const [showAll, setShowAll] = useState(false);
+
+  const selectedGenreId = useGameQueryStore((s) => s.gameQuery.genreId);
+  const setGenreId = useGameQueryStore((s) => s.setGenreId);
 
   const displayedGenres = showAll ? data.results : data.results.slice(0, 3);
 
@@ -30,7 +29,7 @@ const GenreList = ({ selectedGenreId, onSelectGenre }: Props) => {
           <Box
             as="button"
             cursor="pointer"
-            onClick={() => onSelectGenre(genre.id)}
+            onClick={() => setGenreId(genre.id)}
             role="group"
             w="100%"
           >

@@ -1,11 +1,9 @@
 import { Button, Text, Wrap, WrapItem } from "@chakra-ui/react";
-import useTags, { Tag } from "../hooks/useTags";
+import useTags from "../hooks/useTags";
+import useGameQueryStore from "../store";
 
-interface Props {
-  onSelectTag: (tag: Tag) => void;
-}
-
-const TagBar = ({ onSelectTag }: Props) => {
+const TagBar = () => {
+  const setTagId = useGameQueryStore((s) => s.setTagId);
   const { data } = useTags();
 
   return (
@@ -20,7 +18,7 @@ const TagBar = ({ onSelectTag }: Props) => {
             color="gray.500"
             fontSize="14px"
             fontWeight="normal"
-            onClick={() => onSelectTag(tag)}
+            onClick={() => setTagId(tag.id)}
           >
             {tag.name}
           </Button>

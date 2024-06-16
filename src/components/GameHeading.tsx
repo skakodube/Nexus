@@ -1,20 +1,17 @@
 import { Box, Heading } from "@chakra-ui/react";
-import { GameQuery } from "../App";
 import { stripHtmlWithRegex } from "../services/html-remove";
 import CollapsibleTextBox from "./CollapsibleTextBox";
 import TagBar from "./TagBar";
-import { Tag } from "../hooks/useTags";
 import useGenre from "../hooks/useGenre";
 import usePlatform from "../hooks/usePlatform";
+import useGameQueryStore from "../store";
 
-interface Props {
-  gameQuery: GameQuery;
-  onSelectTag: (tag: Tag) => void;
-}
+const GameHeading = () => {
+  const genreId = useGameQueryStore((s) => s.gameQuery.genreId);
+  const { data: genre } = useGenre(genreId);
 
-const GameHeading = ({ gameQuery, onSelectTag }: Props) => {
-  const { data: platform } = usePlatform(gameQuery?.platformId);
-  const { data: genre } = useGenre(gameQuery?.genreId);
+  const platformId = useGameQueryStore((s) => s.gameQuery.platformId);
+  const { data: platform } = usePlatform(platformId);
 
   const anySelected = platform?.name || genre?.name;
 
@@ -39,7 +36,7 @@ const GameHeading = ({ gameQuery, onSelectTag }: Props) => {
       )}
       {anySelected && (
         <Box mb={9}>
-          <TagBar onSelectTag={onSelectTag} />
+          <TagBar />
         </Box>
       )}
     </Box>

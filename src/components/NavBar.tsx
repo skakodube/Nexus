@@ -11,11 +11,7 @@ import InputSearch from "./InputSearch";
 import { RiGamepadLine } from "react-icons/ri";
 import { FaGithub } from "react-icons/fa";
 
-interface Props {
-  onSearch: (search: string) => void;
-}
-
-const NavBar = ({ onSearch }: Props) => {
+const NavBar = () => {
   const defaultColor = useColorModeValue("white", "black");
   const hoverColor = useColorModeValue("white", "gray.800");
   const defaultBg = useColorModeValue("gray.800", "white");
@@ -55,7 +51,7 @@ const NavBar = ({ onSearch }: Props) => {
         </Text>
       </Button>
 
-      <InputSearch onSearch={onSearch}></InputSearch>
+      <InputSearch></InputSearch>
       <Box display={{ base: "none", lg: "block" }}>
         <ColorModeSwitch />
       </Box>

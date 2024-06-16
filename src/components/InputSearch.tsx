@@ -10,23 +10,22 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import { useRef } from "react";
+import useGameQueryStore from "../store";
 
-interface Props {
-  onSearch: (search: string) => void;
-}
-
-const InputSearch = ({ onSearch }: Props) => {
+const InputSearch = () => {
   const ref = useRef<HTMLInputElement>(null);
   const bgColor = useColorModeValue("gray.100", "#3b3b3b");
   const bgColorActive = useColorModeValue("gray.200", "white");
   const color = useColorModeValue("gray.700", "white");
   const colorActive = useColorModeValue("black", "black");
 
+  const setSearchText = useGameQueryStore((s) => s.setSearchText);
+
   return (
     <form
       onSubmit={(event) => {
         event.preventDefault();
-        if (ref.current) onSearch(ref.current.value);
+        if (ref.current) setSearchText(ref.current.value);
       }}
     >
       <InputGroup role="group">

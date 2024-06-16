@@ -10,21 +10,19 @@ import useGames, { Game } from "../hooks/useGames";
 import GameCard from "./GameCard";
 import GameCardSkeleton from "./GameCardSkeleton";
 import GameCardContainer from "./GameCardContainer";
-import { GameQuery } from "../App";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 interface Props {
-  gameQuery: GameQuery;
   columnDisplay: boolean;
 }
 
-const GameGrid = ({ gameQuery, columnDisplay }: Props) => {
+const GameGrid = ({ columnDisplay }: Props) => {
   const spinnerBgColor = useColorModeValue("gray.200", "gray.700");
   const spinnerColor = useColorModeValue("gray.400", "gray.600");
+  const skeletons = Array.from({ length: 12 }, (_, index) => index + 1);
 
   const { data, isLoading, isFetchingNextPage, fetchNextPage, hasNextPage } =
-    useGames(gameQuery);
-  const skeletons = Array.from({ length: 12 }, (_, index) => index + 1);
+    useGames();
 
   const columns = columnDisplay
     ? { base: 1 }

@@ -3,11 +3,7 @@ import { Box, List, ListItem, SkeletonText } from "@chakra-ui/react";
 import usePlatforms, { Platform } from "../hooks/usePlatforms";
 import { platformIconMap } from "./PlatformIconList";
 import ListOption from "./ListOption";
-
-interface Props {
-  onSelectPlatform: (platformId: number) => void;
-  selectedPlatformId?: number;
-}
+import useGameQueryStore from "../store";
 
 const mainPlatforms = [
   "pc",
@@ -18,8 +14,10 @@ const mainPlatforms = [
   "android",
 ];
 
-const PlatformList = ({ onSelectPlatform, selectedPlatformId }: Props) => {
+const PlatformList = () => {
   const { data, isLoading } = usePlatforms();
+  const selectedPlatformId = useGameQueryStore((s) => s.gameQuery.platformId);
+  const setPlatformId = useGameQueryStore((s) => s.setPlatformId);
 
   //  Can't fetch data from API using slug/name of platform
   //  Filtering platform objects by matching their name
@@ -44,7 +42,7 @@ const PlatformList = ({ onSelectPlatform, selectedPlatformId }: Props) => {
             <Box
               as="button"
               cursor="pointer"
-              onClick={() => onSelectPlatform(platform.id)}
+              onClick={() => setPlatformId(platform.id)}
               role="group"
               w="100%"
             >
