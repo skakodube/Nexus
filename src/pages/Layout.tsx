@@ -1,32 +1,23 @@
 import {
-  Box,
-  Button,
   Grid,
   GridItem,
-  HStack,
-  Heading,
   Show,
+  Button,
+  Heading,
+  Box,
   useColorModeValue,
 } from "@chakra-ui/react";
-import NavBar from "./components/NavBar";
-import GameGrid from "./components/GameGrid";
-import GenreList from "./components/GenreList";
-import { useState } from "react";
-import PlatformList from "./components/PlatformList";
-import SortSelector from "./components/SortSelector";
-import PlatformSelector from "./components/PlatformSelector";
-import GameHeading from "./components/GameHeading";
-import DisplaySelector from "./components/DisplaySelector";
-import useGameQueryStore from "./store";
+import { Outlet } from "react-router-dom";
+import GenreList from "../components/GenreList";
+import NavBar from "../components/NavBar";
+import PlatformList from "../components/PlatformList";
+import useGameQueryStore from "../store";
 
-function App() {
+const Layout = () => {
   const color = useColorModeValue("black", "white");
   const hoverColor = useColorModeValue("gray.600", "gray.400");
 
-  const [columnDisplay, setColumnDisplay] = useState(false);
-
   const resetGameQuery = useGameQueryStore((s) => s.resetGameQuery);
-
   return (
     <Grid
       paddingX={10}
@@ -72,23 +63,10 @@ function App() {
         </GridItem>
       </Show>
       <GridItem area={"main"}>
-        <GameHeading />
-        <HStack mb={4} justifyContent="space-between" w={"100%"}>
-          <HStack spacing={2}>
-            <SortSelector />
-            <PlatformSelector />
-          </HStack>
-          <DisplaySelector
-            columnDisplay={columnDisplay}
-            setColumnDisplay={(columnDisplay) =>
-              setColumnDisplay(columnDisplay)
-            }
-          />
-        </HStack>
-        <GameGrid columnDisplay={columnDisplay} />
+        <Outlet />
       </GridItem>
     </Grid>
   );
-}
+};
 
-export default App;
+export default Layout;
