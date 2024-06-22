@@ -10,7 +10,6 @@ import {
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { Game } from "../hooks/useGames";
 import PlatformIconList from "./PlatformIconList";
 import CriticScore from "./CriticScore";
 import getCroppedImageUrl from "../services/image-url";
@@ -18,6 +17,7 @@ import noImage from "../assets/no-image-placeholder.webp";
 import Emoji from "./Emoji";
 import { FaPlus } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import Game from "../entities/Game";
 
 interface Props {
   game: Game;

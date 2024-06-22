@@ -2,12 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import ms from "ms";
 import tags from "../data/tags";
 import APIClient from "../services/apiClient";
-
-export interface Tag {
-  id: number;
-  name: string;
-  slug: string;
-}
+import Tag from "../entities/Tag";
 
 const apiClient = new APIClient<Tag>("/tags");
 
