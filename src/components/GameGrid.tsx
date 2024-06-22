@@ -43,11 +43,9 @@ const GameGrid = ({ columnDisplay }: Props) => {
     games.forEach((game, index) => {
       const columnIndex = index % columns; // Determine the column index using modulo
       columnArrays[columnIndex].push(
-        <Box mb={6}>
-          <GameCardContainer key={game.id}>
-            <GameCard game={game} wide={columnDisplay} />
-          </GameCardContainer>
-        </Box>
+        <GameCardContainer key={game.id}>
+          <GameCard game={game} wide={columnDisplay} />
+        </GameCardContainer>
       );
     });
 
@@ -62,6 +60,7 @@ const GameGrid = ({ columnDisplay }: Props) => {
 
   return (
     <InfiniteScroll
+      style={{ overflow: "visible" }}
       dataLength={fetchedGamesCount}
       hasMore={!!hasNextPage}
       next={() => fetchNextPage()}

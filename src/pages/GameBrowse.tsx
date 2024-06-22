@@ -6,7 +6,7 @@ import DisplaySelector from "../components/DisplaySelector";
 import GameGrid from "../components/GameGrid";
 import { useState } from "react";
 
-const GameCollection = () => {
+const GameBrowse = () => {
   const [columnDisplay, setColumnDisplay] = useState(false);
 
   return (
@@ -27,4 +27,4 @@ const GameCollection = () => {
   );
 };
 
-export default GameCollection;
+export default GameBrowse;

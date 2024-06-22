@@ -1,11 +1,13 @@
 import { Box, Heading } from "@chakra-ui/react";
-import { stripHtmlWithRegex } from "../services/html-remove";
 import CollapsibleTextBox from "./CollapsibleTextBox";
 import TagBar from "./TagBar";
 import useGenre from "../hooks/useGenre";
 import usePlatform from "../hooks/usePlatform";
 import useGameQueryStore from "../store";
+import { convert } from "html-to-text";
 
+// TODO: refactor useGenre/usePlatform for a undefigned id
+// Hooks shoulb be called only if ids are present
 const GameHeading = () => {
   const genreId = useGameQueryStore((s) => s.gameQuery.genreId);
   const { data: genre } = useGenre(genreId);
@@ -28,10 +30,7 @@ const GameHeading = () => {
       </Heading>
       {description && (
         <Box mb={4} display={{ base: "none", sm: "block" }}>
-          <CollapsibleTextBox
-            text={stripHtmlWithRegex(description)}
-            charLimit={650}
-          />
+          <CollapsibleTextBox text={convert(description)} charLimit={650} />
         </Box>
       )}
       {anySelected && (

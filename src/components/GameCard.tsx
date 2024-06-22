@@ -17,6 +17,7 @@ import getCroppedImageUrl from "../services/image-url";
 import noImage from "../assets/no-image-placeholder.webp";
 import Emoji from "./Emoji";
 import { FaPlus } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 interface Props {
   game: Game;
@@ -37,7 +38,11 @@ const GameCard = ({ game, wide }: Props) => {
 
   return (
     <Card overflow="hidden" borderRadius={10} bg={cardBg}>
-      <Image src={getCroppedImageUrl(game.background_image) || noImage}></Image>
+      <Image
+        aspectRatio={"16/9"}
+        objectFit={"cover"}
+        src={getCroppedImageUrl(game.background_image) || noImage}
+      ></Image>
 
       <CardBody>
         <HStack mb={2} justifyContent="space-between">
@@ -48,7 +53,7 @@ const GameCard = ({ game, wide }: Props) => {
         </HStack>
 
         <Heading fontSize="2xl">
-          {game.name + "  "}
+          <Link to={`games/${game.slug}`}>{game.name + "  "}</Link>
           <Emoji rating={game.rating_top} />
         </Heading>
 

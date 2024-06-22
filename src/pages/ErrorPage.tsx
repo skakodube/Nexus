@@ -6,6 +6,7 @@ import {
   Grid,
   GridItem,
   Heading,
+  LightMode,
   Text,
   VStack,
 } from "@chakra-ui/react";
@@ -43,15 +44,17 @@ const ErrorPage = () => {
                 ? `Whoops! \nWe couldn't find that page.`
                 : "An unexpected error occurred."}
             </Text>
-            <Button
-              mt={20}
-              fontWeight={"normal"}
-              fontSize={"lg"}
-              colorScheme="gray"
-              paddingY={6}
-            >
-              Main Page
-            </Button>
+            <LightMode>
+              <Button
+                mt={20}
+                fontWeight={"normal"}
+                fontSize={"lg"}
+                colorScheme="gray"
+                paddingY={6}
+              >
+                Main Page
+              </Button>
+            </LightMode>
           </VStack>
         </Center>
       </Grid>
