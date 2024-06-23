@@ -15,6 +15,7 @@ import {
 import CollapsibleTextBox from "../components/CollapsibleTextBox";
 import GameAttributes from "../components/GameAttributes";
 import dateFormat from "../services/date-format";
+import GameMedia from "../components/GameMedia";
 
 const GameDetailsPage = () => {
   const defaultColor = useColorModeValue("white", "gray.800");
@@ -34,7 +35,7 @@ const GameDetailsPage = () => {
 
   return (
     <Center>
-      <Grid gridTemplateColumns={"2fr 1fr"} maxW={"1024px"}>
+      <Grid gridTemplateColumns={"60% 40%"} maxW={"960px"} gap={8}>
         <GridItem>
           <HStack>
             <Badge
@@ -78,7 +79,7 @@ const GameDetailsPage = () => {
           </Box>
         </GridItem>
         <GridItem>
-          <Text>Shit</Text>
+          <GameMedia gameId={game.id} />
         </GridItem>
       </Grid>
     </Center>
