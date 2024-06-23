@@ -1,24 +1,26 @@
 import { useState } from "react";
-import { Button, useColorModeValue } from "@chakra-ui/react";
+import { Box, Text, Button, useColorModeValue } from "@chakra-ui/react";
 
 interface Props {
-  text: string;
+  children: string;
   charLimit: number;
 }
 
-const CollapsibleTextBox = ({ text, charLimit }: Props) => {
+const CollapsibleTextBox = ({ children, charLimit }: Props) => {
   const defaultColor = useColorModeValue("white", "gray.800");
   const defaultBg = useColorModeValue("gray.500", "white");
 
   const [isExpanded, setIsExpanded] = useState(false);
 
   const previewText =
-    text.length > charLimit ? text.slice(0, charLimit) + "..." : text;
+    children.length > charLimit
+      ? children.slice(0, charLimit) + "..."
+      : children;
 
   return (
-    <>
-      {isExpanded ? text : previewText}{" "}
-      {text.length > charLimit && !isExpanded && (
+    <Box>
+      {isExpanded ? children : previewText}{" "}
+      {children.length > charLimit && !isExpanded && (
         <Button
           bg={defaultBg}
           borderRadius="3px"
@@ -26,14 +28,14 @@ const CollapsibleTextBox = ({ text, charLimit }: Props) => {
           fontSize="12px"
           mt={2}
           onClick={() => setIsExpanded(!isExpanded)}
-          p="1px 6px"
+          p=".5px 6px"
           size="sm"
           variant="link"
         >
           {isExpanded ? "show less" : "read more"}
         </Button>
       )}
-    </>
+    </Box>
   );
 };
 

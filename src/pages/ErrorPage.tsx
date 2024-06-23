@@ -37,7 +37,7 @@ const ErrorPage = () => {
         <Center height={"100vh"}>
           <VStack alignItems={"left"} mb={20}>
             <Heading fontSize={{ base: 150, lg: 190 }} fontWeight={"500"}>
-              404
+              {404}
             </Heading>
             <Text whiteSpace="pre-line" fontSize={20} fontWeight={"600"}>
               {isRouteErrorResponse(error)

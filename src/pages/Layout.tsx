@@ -18,6 +18,7 @@ const Layout = () => {
   const hoverColor = useColorModeValue("gray.600", "gray.400");
 
   const resetGameQuery = useGameQueryStore((s) => s.resetGameQuery);
+
   return (
     <Grid
       paddingX={10}

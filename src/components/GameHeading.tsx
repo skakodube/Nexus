@@ -30,7 +30,9 @@ const GameHeading = () => {
       </Heading>
       {description && (
         <Box mb={4} display={{ base: "none", sm: "block" }}>
-          <CollapsibleTextBox text={convert(description)} charLimit={650} />
+          <CollapsibleTextBox charLimit={650}>
+            {convert(description)}
+          </CollapsibleTextBox>
         </Box>
       )}
       {anySelected && (

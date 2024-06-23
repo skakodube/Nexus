@@ -18,6 +18,7 @@ import Emoji from "./Emoji";
 import { FaPlus } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Game from "../entities/Game";
+import dateFormat from "../services/date-format";
 
 interface Props {
   game: Game;
@@ -27,14 +28,6 @@ interface Props {
 const GameCard = ({ game, wide }: Props) => {
   const cardBg = useColorModeValue("gray.100", "gray.700");
   const buttonBg = useColorModeValue("gray.200", "#2d2d2d");
-
-  const dateFormat = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-    });
-  };
 
   return (
     <Card overflow="hidden" borderRadius={10} bg={cardBg}>

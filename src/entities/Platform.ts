@@ -4,4 +4,5 @@ export default interface Platform {
   slug: string;
   image_background: string;
   description?: string;
+  requirements?: { minimum: string; recommended: string };
 }

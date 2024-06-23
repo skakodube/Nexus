@@ -15,6 +15,7 @@ const CriticScore = ({ score }: Props) => {
       display="flex"
       justifyContent="center"
       maxH="20px"
+      maxW="30px"
       paddingX={2}
       variant="outline"
     >
