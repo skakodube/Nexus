@@ -1,4 +1,11 @@
-import { Image, Grid, GridItem, Spinner, Button } from "@chakra-ui/react";
+import {
+  Image,
+  Grid,
+  GridItem,
+  Spinner,
+  Button,
+  AspectRatio,
+} from "@chakra-ui/react";
 import useTrailers from "../hooks/useTrailers";
 import useScreenshots from "../hooks/useScreenshots";
 import noImage from "../assets/no-image-placeholder.webp";
@@ -23,29 +30,33 @@ const GameMedia = ({ gameId }: Props) => {
 
   const screenshotImagesShow = screenshotImages?.map(
     (imageObj) => imageObj.image
-  ) || [noImage, noImage, noImage, noImage];
+  ) || [noImage, noImage, noImage];
 
   return (
     <Grid gridTemplateRows={"repeat(8, 1fr)"} gap={1}>
       <GridItem colSpan={2} rowSpan={2}>
-        {first ? (
-          <video
-            src={first.data[480]}
-            poster={first.preview}
-            autoPlay={true}
-            muted
-            controls
-            loop
-            style={{ borderRadius: 6 }}
-          ></video>
-        ) : (
-          <Image borderRadius={6} src={screenshots?.results[0].image}></Image>
-        )}
+        <AspectRatio ratio={16 / 9}>
+          {first ? (
+            <video
+              src={first.data[480]}
+              poster={first.preview}
+              autoPlay={true}
+              muted
+              controls
+              loop
+              style={{ borderRadius: 6 }}
+            ></video>
+          ) : (
+            <Image borderRadius={6} src={screenshots?.results[0].image}></Image>
+          )}
+        </AspectRatio>
       </GridItem>
       <GridItem colSpan={2} rowSpan={2}>
         <Grid gridTemplateColumns={"1fr 1fr"} gap={4}>
           {screenshotImagesShow.map((image, index) => (
-            <Image key={index} borderRadius={4} src={image}></Image>
+            <AspectRatio ratio={16 / 9}>
+              <Image key={index} borderRadius={4} src={image}></Image>
+            </AspectRatio>
           ))}
           <Button
             w={"100%"}

@@ -10,6 +10,7 @@ import ColorModeSwitch from "./ColorModeSwitch";
 import InputSearch from "./InputSearch";
 import { RiGamepadLine } from "react-icons/ri";
 import { FaGithub } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const NavBar = () => {
   const defaultColor = useColorModeValue("white", "black");
@@ -23,12 +24,14 @@ const NavBar = () => {
   };
   return (
     <HStack paddingY={7}>
-      <Icon
-        as={RiGamepadLine}
-        boxSize={"44px"}
-        cursor={"pointer"}
-        mr={{ base: 3, md: 6 }}
-      ></Icon>
+      <Link to={"/"}>
+        <Icon
+          as={RiGamepadLine}
+          boxSize={"44px"}
+          cursor={"pointer"}
+          mr={{ base: 3, md: 6 }}
+        ></Icon>
+      </Link>
 
       <Button
         _hover={{ bg: hoverBg, color: hoverColor }}

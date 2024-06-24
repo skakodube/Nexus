@@ -11,13 +11,14 @@ import useGenres from "../hooks/useGenres";
 import { useState } from "react";
 import ExtendList from "./ExtendList";
 import useGameQueryStore from "../store";
+import { Link } from "react-router-dom";
 
 const GenreList = () => {
   const { data, isLoading } = useGenres();
   const [showAll, setShowAll] = useState(false);
 
   const selectedGenreId = useGameQueryStore((s) => s.gameQuery.genreId);
-  const setGenreId = useGameQueryStore((s) => s.setGenreId);
+  const resetAndsetGenreId = useGameQueryStore((s) => s.resetAndsetGenreId);
 
   const displayedGenres = showAll ? data.results : data.results.slice(0, 3);
 
@@ -29,24 +30,28 @@ const GenreList = () => {
           <Box
             as="button"
             cursor="pointer"
-            onClick={() => setGenreId(genre.id)}
+            onClick={() => {
+              resetAndsetGenreId(genre.id);
+            }}
             role="group"
             w="100%"
           >
-            <HStack>
-              <Image
-                borderRadius={6}
-                boxSize="32px"
-                objectFit="cover"
-                src={genre.image_background}
-              ></Image>
-              <Text
-                fontWeight={genre.id === selectedGenreId ? "bold" : "normal"}
-                whiteSpace="nowrap"
-              >
-                {genre.name}
-              </Text>
-            </HStack>
+            <Link to={`games/${genre.slug}`}>
+              <HStack>
+                <Image
+                  borderRadius={6}
+                  boxSize="32px"
+                  objectFit="cover"
+                  src={genre.image_background}
+                ></Image>
+                <Text
+                  fontWeight={genre.id === selectedGenreId ? "bold" : "normal"}
+                  whiteSpace="nowrap"
+                >
+                  {genre.name}
+                </Text>
+              </HStack>
+            </Link>
           </Box>
         </ListItem>
       ))}

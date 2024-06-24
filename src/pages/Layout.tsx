@@ -7,7 +7,7 @@ import {
   Box,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import GenreList from "../components/GenreList";
 import NavBar from "../components/NavBar";
 import PlatformList from "../components/PlatformList";
@@ -37,18 +37,20 @@ const Layout = () => {
 
       <Show above="lg">
         <GridItem my={10} area={"aside"}>
-          <Box mb={5} onClick={() => resetGameQuery()}>
-            <Button
-              variant="link"
-              fontSize={"2xl"}
-              fontWeight={"bold"}
-              style={{ textDecoration: "none" }}
-              color={color}
-              _hover={{ color: hoverColor }}
-            >
-              Home
-            </Button>
-          </Box>
+          <Link to={"games/"}>
+            <Box mb={5} onClick={() => resetGameQuery()}>
+              <Button
+                variant="link"
+                fontSize={"2xl"}
+                fontWeight={"bold"}
+                style={{ textDecoration: "none" }}
+                color={color}
+                _hover={{ color: hoverColor }}
+              >
+                All Games
+              </Button>
+            </Box>
+          </Link>
           <Box mb={5}>
             <Heading mb={3} fontSize="2xl">
               Platforms

@@ -12,6 +12,8 @@ import GameCardSkeleton from "./GameCardSkeleton";
 import GameCardContainer from "./GameCardContainer";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Game from "../entities/Game";
+import { useLocation } from "react-router-dom";
+import useGameQueryStore from "../store";
 
 interface Props {
   columnDisplay: boolean;

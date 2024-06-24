@@ -18,6 +18,7 @@ const useGames = () => {
           platforms: gameQuery.platformId,
           tags: gameQuery.tagId,
           ordering: gameQuery.sortOrder,
+          dates: gameQuery.dates,
           search: gameQuery.searchText,
           page: pageParam,
         },

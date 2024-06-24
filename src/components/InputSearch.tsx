@@ -11,6 +11,7 @@ import {
 } from "@chakra-ui/react";
 import { useRef } from "react";
 import useGameQueryStore from "../store";
+import { useNavigate } from "react-router-dom";
 
 const InputSearch = () => {
   const ref = useRef<HTMLInputElement>(null);
@@ -18,6 +19,7 @@ const InputSearch = () => {
   const bgColorActive = useColorModeValue("gray.200", "white");
   const color = useColorModeValue("gray.700", "white");
   const colorActive = useColorModeValue("black", "black");
+  const navigate = useNavigate();
 
   const setSearchText = useGameQueryStore((s) => s.setSearchText);
 
@@ -26,6 +28,7 @@ const InputSearch = () => {
       onSubmit={(event) => {
         event.preventDefault();
         if (ref.current) setSearchText(ref.current.value);
+        navigate("/");
       }}
     >
       <InputGroup role="group">

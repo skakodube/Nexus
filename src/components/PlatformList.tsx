@@ -1,9 +1,10 @@
 import { FaGamepad } from "react-icons/fa";
 import { Box, List, ListItem, SkeletonText } from "@chakra-ui/react";
-import usePlatforms, { Platform } from "../hooks/usePlatforms";
+import usePlatforms from "../hooks/usePlatforms";
 import { platformIconMap } from "./PlatformIconList";
 import ListOption from "./ListOption";
 import useGameQueryStore from "../store";
+import Platform from "../entities/Platform";
 
 const mainPlatforms = [
   "pc",
@@ -51,6 +52,7 @@ const PlatformList = () => {
                 name={platform.name}
                 image={matchPlatformIcon(platform.slug)}
                 selected={platform?.id == selectedPlatformId}
+                link={`/games/${platform.slug}`}
               ></ListOption>
             </Box>
           </ListItem>

@@ -4,11 +4,20 @@ import SortSelector from "../components/SortSelector";
 import PlatformSelector from "../components/PlatformSelector";
 import DisplaySelector from "../components/DisplaySelector";
 import GameGrid from "../components/GameGrid";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
+import useGameQueryStore from "../store";
 
 const GameBrowse = () => {
   const [columnDisplay, setColumnDisplay] = useState(false);
+  const currentLocation = useLocation();
 
+  const setTrending = useGameQueryStore((g) => g.setTrending);
+  useEffect(() => {
+    if (currentLocation.pathname === "/") {
+      setTrending();
+    }
+  }, [currentLocation.pathname, setTrending]);
   return (
     <>
       <GameHeading />
