@@ -27,4 +27,5 @@ export default interface Game {
   description_raw: string;
   requirements: { minimum: string; recommended: string };
   playtime: number;
+  short_screenshots: { id: number; image: string }[];
 }

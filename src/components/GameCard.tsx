@@ -1,8 +1,10 @@
 import {
+  AspectRatio,
   Box,
   Button,
   Card,
   CardBody,
+  Flex,
   HStack,
   Heading,
   Icon,
@@ -19,6 +21,7 @@ import { FaPlus } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Game from "../entities/Game";
 import dateFormat from "../services/date-format";
+import { useEffect, useState } from "react";
 
 interface Props {
   game: Game;
@@ -28,14 +31,74 @@ interface Props {
 const GameCard = ({ game, wide }: Props) => {
   const cardBg = useColorModeValue("gray.100", "gray.700");
   const buttonBg = useColorModeValue("gray.200", "#2d2d2d");
+  const [hoveredBox, setHoveredBox] = useState(0);
+  const [imageIndex, setImageIndex] = useState(0);
 
+  const handleMouseEnter = (index: number) => {
+    setImageIndex(index);
+    setHoveredBox(index);
+  };
+
+  const handleMouseLeave = () => {
+    setImageIndex(0);
+    setHoveredBox(0);
+  };
   return (
-    <Card overflow="hidden" borderRadius={10} bg={cardBg}>
-      <Image
-        aspectRatio={"16/9"}
-        objectFit={"cover"}
-        src={getCroppedImageUrl(game.background_image) || noImage}
-      ></Image>
+    <Card overflow="hidden" borderRadius={10} bg={cardBg} role="group">
+      <Box
+        aspectRatio={16 / 9}
+        position={"relative"}
+        backgroundImage={getCroppedImageUrl(game.background_image)}
+      >
+        {imageIndex ? (
+          game.short_screenshots.map((image, index) => (
+            <Image
+              aspectRatio={16 / 9}
+              display={index == imageIndex ? "block" : "none"}
+              key={index}
+              objectFit={"cover"}
+              src={getCroppedImageUrl(image.image) || noImage}
+            ></Image>
+          ))
+        ) : (
+          <Image
+            aspectRatio={16 / 9}
+            display={!imageIndex ? "block" : "none"}
+            objectFit={"cover"}
+            src={getCroppedImageUrl(game.background_image) || noImage}
+          ></Image>
+        )}
+        <Flex
+          visibility={"hidden"}
+          _groupHover={{ visibility: "visible" }}
+          position={"absolute"}
+          bottom={0}
+          height={"100%"}
+          width={"90%"}
+          left={"5%"}
+          right={"5%"}
+        >
+          {game.short_screenshots.map((image, index) => (
+            <Box
+              flex={1}
+              key={image.id}
+              display={"flex"}
+              alignItems={"flex-end"}
+              onMouseEnter={() => handleMouseEnter(index)}
+              onMouseLeave={() => handleMouseLeave()}
+            >
+              <Box
+                backgroundColor={hoveredBox === index ? "gray.200" : "gray.600"}
+                flex={1}
+                marginX={"4px"}
+                marginY={3}
+                height={"4px"}
+                borderRadius={6}
+              ></Box>
+            </Box>
+          ))}
+        </Flex>
+      </Box>
 
       <CardBody>
         <HStack mb={2} justifyContent="space-between">
