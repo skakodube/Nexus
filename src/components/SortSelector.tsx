@@ -45,7 +45,7 @@ const SortSelector = () => {
           {currentSortOrder?.label || "Relevance"}
         </Box>
       </MenuButton>
-      <MenuList>
+      <MenuList zIndex={2}>
         {sortOrders.map((order) => (
           <MenuItem
             key={order.value}

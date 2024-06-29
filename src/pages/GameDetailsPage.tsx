@@ -11,6 +11,9 @@ import {
   HStack,
   Badge,
   useColorModeValue,
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
 } from "@chakra-ui/react";
 import CollapsibleTextBox from "../components/CollapsibleTextBox";
 import GameAttributes from "../components/GameAttributes";
@@ -36,6 +39,30 @@ const GameDetailsPage = () => {
   return (
     <Center>
       <Grid gridTemplateColumns={"60% 40%"} maxW={"960px"} gap={8}>
+        <GridItem colSpan={2}>
+          <Breadcrumb
+            separator="/"
+            textTransform={"uppercase"}
+            fontSize={"12px"}
+            color={"gray.600"}
+          >
+            <BreadcrumbItem>
+              <BreadcrumbLink _hover={{ color: "white" }} href="#">
+                Home
+              </BreadcrumbLink>
+            </BreadcrumbItem>
+
+            <BreadcrumbItem>
+              <BreadcrumbLink _hover={{ color: "white" }} href="#">
+                About
+              </BreadcrumbLink>
+            </BreadcrumbItem>
+
+            <BreadcrumbItem isCurrentPage>
+              <BreadcrumbLink>{game.name}</BreadcrumbLink>
+            </BreadcrumbItem>
+          </Breadcrumb>
+        </GridItem>
         <GridItem>
           <HStack>
             <Badge
@@ -49,13 +76,15 @@ const GameDetailsPage = () => {
             >
               {dateFormat(game.released)}
             </Badge>
-            <Text
-              fontSize={"13px"}
-              letterSpacing={"1.5px"}
-              textTransform={"uppercase"}
-            >
-              {"average play time: " + game.playtime + " hours"}
-            </Text>
+            {game.playtime > 0 && (
+              <Text
+                fontSize={"13px"}
+                letterSpacing={"1.5px"}
+                textTransform={"uppercase"}
+              >
+                {"average play time: " + game.playtime + " hours"}
+              </Text>
+            )}
           </HStack>
           <Heading marginY={2} fontSize={"72px"}>
             {game.name}
@@ -69,14 +98,16 @@ const GameDetailsPage = () => {
             </CollapsibleTextBox>
           </Box>
           <GameAttributes game={game}></GameAttributes>
-          <Box marginY={5}>
-            <Heading marginY={2} fontSize={"2xl"}>
-              System requirements for PC
-            </Heading>
-            <Text whiteSpace={"pre-line"} fontSize={"sm"}>
-              {requirements}
-            </Text>
-          </Box>
+          {requirements && requirements.trim().length > 0 && (
+            <Box marginY={5}>
+              <Heading marginY={2} fontSize={"2xl"}>
+                System requirements for PC
+              </Heading>
+              <Text whiteSpace={"pre-line"} fontSize={"sm"}>
+                {requirements}
+              </Text>
+            </Box>
+          )}
         </GridItem>
         <GridItem>
           <GameMedia gameId={game.id} />

@@ -54,8 +54,8 @@ const GameMedia = ({ gameId }: Props) => {
       <GridItem colSpan={2} rowSpan={2}>
         <Grid gridTemplateColumns={"1fr 1fr"} gap={4}>
           {screenshotImagesShow.map((image, index) => (
-            <AspectRatio ratio={16 / 9}>
-              <Image key={index} borderRadius={4} src={image}></Image>
+            <AspectRatio key={index} ratio={16 / 9}>
+              <Image borderRadius={4} src={image}></Image>
             </AspectRatio>
           ))}
           <Button

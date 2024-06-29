@@ -31,7 +31,7 @@ const GameBrowse = () => {
           setColumnDisplay={(columnDisplay) => setColumnDisplay(columnDisplay)}
         />
       </HStack>
-      <GameGrid columnDisplay={columnDisplay} />
+      <GameGrid isSingleColumnDisplay={columnDisplay} />
     </>
   );
 };

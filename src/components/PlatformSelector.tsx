@@ -46,7 +46,7 @@ const PlatformSelector = () => {
           Platforms
         </MenuButton>
       )}
-      <MenuList>
+      <MenuList zIndex={2}>
         {data?.results &&
           data?.results.map((platform) => (
             <MenuItem

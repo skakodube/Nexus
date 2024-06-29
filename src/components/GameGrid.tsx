@@ -12,14 +12,12 @@ import GameCardSkeleton from "./GameCardSkeleton";
 import GameCardContainer from "./GameCardContainer";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Game from "../entities/Game";
-import { useLocation } from "react-router-dom";
-import useGameQueryStore from "../store";
 
 interface Props {
-  columnDisplay: boolean;
+  isSingleColumnDisplay: boolean;
 }
 
-const GameGrid = ({ columnDisplay }: Props) => {
+const GameGrid = ({ isSingleColumnDisplay }: Props) => {
   const spinnerBgColor = useColorModeValue("gray.200", "gray.700");
   const spinnerColor = useColorModeValue("gray.400", "gray.600");
   const skeletons = Array.from({ length: 12 }, (_, index) => index + 1);
@@ -27,7 +25,7 @@ const GameGrid = ({ columnDisplay }: Props) => {
   const { data, isLoading, isFetchingNextPage, fetchNextPage, hasNextPage } =
     useGames();
 
-  const columns = columnDisplay
+  const columns = isSingleColumnDisplay
     ? { base: 1 }
     : { base: 1, md: 2, lg: 3, xl: 4 };
   const currentColumns = useBreakpointValue(columns) ?? 1;
@@ -47,7 +45,7 @@ const GameGrid = ({ columnDisplay }: Props) => {
       const columnIndex = index % columns; // Determine the column index using modulo
       columnArrays[columnIndex].push(
         <GameCardContainer key={game.id}>
-          <GameCard game={game} wide={columnDisplay} />
+          <GameCard game={game} isWide={isSingleColumnDisplay} />
         </GameCardContainer>
       );
     });
@@ -82,7 +80,7 @@ const GameGrid = ({ columnDisplay }: Props) => {
               <GameCardSkeleton />
             </GameCardContainer>
           ))}
-        {columnDisplay ? (
+        {isSingleColumnDisplay ? (
           <Center>
             {distributedCards.map((column, columnIndex) => (
               <Box key={columnIndex}>{column}</Box>
