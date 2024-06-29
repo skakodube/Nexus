@@ -15,9 +15,9 @@ import { useNavigate } from "react-router-dom";
 
 const InputSearch = () => {
   const ref = useRef<HTMLInputElement>(null);
-  const bgColor = useColorModeValue("gray.100", "#3b3b3b");
+  const bgColor = useColorModeValue("gray.100", "rgba(255, 255, 255, 0.16)");
   const bgColorActive = useColorModeValue("gray.200", "white");
-  const color = useColorModeValue("gray.700", "white");
+  const color = useColorModeValue("gray.700", "rgba(255, 255, 255, 0.6)");
   const colorActive = useColorModeValue("black", "black");
   const navigate = useNavigate();
 
@@ -31,7 +31,7 @@ const InputSearch = () => {
         navigate("/");
       }}
     >
-      <InputGroup role="group">
+      <InputGroup role="group" size={"md"}>
         <InputLeftElement
           color={"gray.500"}
           display={{ base: "none", sm: "flex" }}
@@ -40,15 +40,15 @@ const InputSearch = () => {
         </InputLeftElement>
 
         <Input
+          fontSize={"14px"}
           _groupHover={{ bg: bgColorActive, color: colorActive }}
           bg={bgColor}
           ref={ref}
           color={color}
-          borderRadius={20}
+          borderRadius={30}
           placeholder="Search games"
           _placeholder={{
-            opacity: 0.7,
-            color: "gray.500",
+            color: color,
             _groupHover: { color: "black" },
           }}
           variant={"filled"}

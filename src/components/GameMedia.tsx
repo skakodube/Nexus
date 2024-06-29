@@ -28,12 +28,13 @@ const GameMedia = ({ gameId }: Props) => {
     ? screenshots?.results.slice(1, 4)
     : screenshots?.results.slice(0, 3);
 
-  const screenshotImagesShow = screenshotImages?.map(
-    (imageObj) => imageObj.image
-  ) || [noImage, noImage, noImage];
+  const screenshotImagesShow =
+    screenshotImages && screenshotImages?.length > 0
+      ? screenshotImages?.map((imageObj) => imageObj.image)
+      : [noImage, noImage, noImage];
 
   return (
-    <Grid gridTemplateRows={"repeat(8, 1fr)"} gap={1}>
+    <Grid gridTemplateRows={`repeat(4}, 1fr)`} gap={1}>
       <GridItem colSpan={2} rowSpan={2}>
         <AspectRatio ratio={16 / 9}>
           {first ? (
@@ -63,7 +64,7 @@ const GameMedia = ({ gameId }: Props) => {
             height={"100%"}
             fontWeight={400}
             fontSize={"13px"}
-            color={"gray.600"}
+            color={"gray.500"}
             backgroundImage={
               screenshotImagesShow[screenshotImagesShow.length - 1]
             }

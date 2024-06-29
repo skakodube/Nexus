@@ -10,8 +10,8 @@ import {
 import { IoPhonePortraitOutline } from "react-icons/io5";
 
 import { BsAndroid2, BsGlobe } from "react-icons/bs";
-import { Platform } from "../hooks/usePlatforms";
 import { IconType } from "react-icons";
+import Platform from "../entities/Platform";
 
 interface Props {
   platforms: Platform[];

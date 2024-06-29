@@ -108,12 +108,12 @@ const GameAttributes = ({ game }: Props) => {
               </Box>
             ))}
           </DefinitionItem>
+          {game.website && (
+            <DefinitionItem term={"Website"}>
+              <ChakraLink href={game.website}>{game.website}</ChakraLink>
+            </DefinitionItem>
+          )}
         </GridItem>
-      )}
-      {game.website && (
-        <DefinitionItem term={"Website"}>
-          <ChakraLink href={game.website}>{game.website}</ChakraLink>
-        </DefinitionItem>
       )}
     </Grid>
   );

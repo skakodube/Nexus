@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Box, Image, Flex } from "@chakra-ui/react";
 import noImage from "../assets/no-image-placeholder.webp";
-import getCroppedImageUrl from "../services/image-url";
+import { getCroppedImageUrl } from "../services/image-url";
 import Game from "../entities/Game";
 
 interface Props {
@@ -66,7 +66,7 @@ const ImageCarousel = ({ game }: Props) => {
           >
             {/* Visuals */}
             <Box
-              backgroundColor={hoveredBox === index ? "gray.200" : "gray.600"}
+              backgroundColor={hoveredBox === index ? "gray.200" : "gray.500"}
               borderRadius={6}
               flex={1}
               height={"4px"}

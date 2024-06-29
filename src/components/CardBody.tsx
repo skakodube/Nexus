@@ -104,12 +104,7 @@ const DefinitionItems = ({ game, isWide, isPlaceholder = false }: Props) => {
                 ?.sort((a: Genre, b: Genre) => a.name.localeCompare(b.name))
                 ?.map((genre, index, array) => (
                   <Box key={genre.id}>
-                    <ChakraLink
-                      as={ReactRouterLink}
-                      to={"/games/" + genre.slug}
-                    >
-                      {genre.name}
-                    </ChakraLink>
+                    <ChakraLink>{genre.name}</ChakraLink>
                     {index === array.length - 1 ? "" : ","}
                   </Box>
                 ))}

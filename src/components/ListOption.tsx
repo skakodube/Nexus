@@ -12,7 +12,7 @@ interface Props {
 const ListOption = ({ image, name, selected, link }: Props) => {
   const defaultColor = useColorModeValue("gray.700", "white");
   const activeColor = useColorModeValue("white", "black");
-  const defaultBg = useColorModeValue("gray.200", "gray.700");
+  const defaultBg = useColorModeValue("gray.200", "gray.600");
   const activeBg = useColorModeValue("black", "white");
   return (
     <Link to={link}>

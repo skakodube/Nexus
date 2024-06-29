@@ -39,7 +39,7 @@ const PlatformList = () => {
       {isLoading && <SkeletonText />}
       {data?.results &&
         filteredPlatforms?.map((platform) => (
-          <ListItem key={platform.id} paddingY="3px">
+          <ListItem key={platform.id} paddingY="4px">
             <Box
               as="button"
               cursor="pointer"

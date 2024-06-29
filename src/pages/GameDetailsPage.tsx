@@ -14,11 +14,20 @@ import {
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
+  Icon,
+  SimpleGrid,
+  Link as ChakraLink,
+  Button,
 } from "@chakra-ui/react";
 import CollapsibleTextBox from "../components/CollapsibleTextBox";
 import GameAttributes from "../components/GameAttributes";
 import dateFormat from "../services/date-format";
 import GameMedia from "../components/GameMedia";
+import { platformIconMap } from "../components/PlatformIconList";
+import { Link as ReactRouterLink } from "react-router-dom";
+import usePageData from "../stores/pageData";
+import { useEffect } from "react";
+import storeIconMap from "../data/storeIconMap";
 
 const GameDetailsPage = () => {
   const defaultColor = useColorModeValue("white", "gray.800");
@@ -27,6 +36,18 @@ const GameDetailsPage = () => {
   const { slug } = useParams();
   const { data: game, isLoading, error } = useGame(slug!);
 
+  const setBackgroundImage = usePageData((s) => s.setBackgroundImage);
+  const resetBackgroundImage = usePageData((s) => s.resetBackgroundImage);
+
+  useEffect(() => {
+    if (game) {
+      setBackgroundImage(game.background_image);
+    }
+    return () => {
+      resetBackgroundImage();
+    };
+  }, [setBackgroundImage, resetBackgroundImage, game]);
+
   if (isLoading) return <Spinner />;
 
   if (error || !game) throw error;
@@ -34,27 +55,46 @@ const GameDetailsPage = () => {
   const requirements =
     (game.platforms[0].requirements.minimum ?? "") +
     "\n" +
+    "\n" +
     (game.platforms[0].requirements.recommended ?? "");
 
   return (
     <Center>
-      <Grid gridTemplateColumns={"60% 40%"} maxW={"960px"} gap={8}>
+      <Grid
+        gridTemplateColumns={"55% 40%"}
+        maxW={"960px"}
+        rowGap={8}
+        columnGap={12}
+      >
         <GridItem colSpan={2}>
           <Breadcrumb
+            spacing={1}
             separator="/"
             textTransform={"uppercase"}
-            fontSize={"12px"}
-            color={"gray.600"}
+            fontSize={"10px"}
+            color={"gray.500"}
+            letterSpacing={"1.5px"}
+            fontWeight={"500"}
           >
             <BreadcrumbItem>
-              <BreadcrumbLink _hover={{ color: "white" }} href="#">
+              <BreadcrumbLink
+                textDecor={"none"}
+                as={ReactRouterLink}
+                _hover={{ color: "white" }}
+                to={"/"}
+              >
                 Home
               </BreadcrumbLink>
             </BreadcrumbItem>
 
             <BreadcrumbItem>
-              <BreadcrumbLink _hover={{ color: "white" }} href="#">
-                About
+              <BreadcrumbLink
+                textDecor={"none"}
+                as={ReactRouterLink}
+                to={"/games"}
+                _hover={{ color: "white" }}
+              >
+                Games
               </BreadcrumbLink>
             </BreadcrumbItem>
 
@@ -64,18 +104,31 @@ const GameDetailsPage = () => {
           </Breadcrumb>
         </GridItem>
         <GridItem>
-          <HStack>
-            <Badge
-              bg={defaultBg}
-              borderRadius="4px"
-              color={defaultColor}
-              fontWeight={400}
-              fontSize={"12px"}
-              letterSpacing={"1.5px"}
-              padding={"1px 6px"}
-            >
-              {dateFormat(game.released)}
-            </Badge>
+          <HStack spacing={4} ml={1}>
+            {game.released && (
+              <Badge
+                bg={defaultBg}
+                borderRadius="4px"
+                color={defaultColor}
+                fontWeight={400}
+                fontSize={"12px"}
+                letterSpacing={"1.5px"}
+                padding={"1px 6px"}
+              >
+                {dateFormat(game.released)}
+              </Badge>
+            )}
+            {game.platforms && (
+              <HStack justifyContent={"space-between"}>
+                {game.parent_platforms.map((platform) => (
+                  <Icon
+                    key={platform.platform.id}
+                    boxSize={"18px"}
+                    as={platformIconMap[platform.platform.slug]}
+                  ></Icon>
+                ))}
+              </HStack>
+            )}
             {game.playtime > 0 && (
               <Text
                 fontSize={"13px"}
@@ -111,6 +164,40 @@ const GameDetailsPage = () => {
         </GridItem>
         <GridItem>
           <GameMedia gameId={game.id} />
+          {game.updated && (
+            <Text
+              textAlign={"center"}
+              mt={3}
+              color={"gray.500"}
+              fontSize={"sm"}
+            >
+              {"Last Modified: " + dateFormat(game.updated)}
+            </Text>
+          )}
+          <Heading mt={10} fontWeight={"500"} color="gray.500" fontSize={"md"}>
+            Where to buy
+          </Heading>
+          <SimpleGrid gridTemplateColumns={"1fr 1fr"} mt={5} gap={4}>
+            {game.stores.map((store) => (
+              <GridItem>
+                <Button
+                  as={ReactRouterLink}
+                  to={"https://" + store.store.domain}
+                  w={"100%"}
+                  variant={"solid"}
+                  rightIcon={
+                    <Icon
+                      boxSize={6}
+                      as={storeIconMap[store.store.slug]}
+                    ></Icon>
+                  }
+                  color={"gray.500"}
+                >
+                  {store.store.name}
+                </Button>
+              </GridItem>
+            ))}
+          </SimpleGrid>
         </GridItem>
       </Grid>
     </Center>

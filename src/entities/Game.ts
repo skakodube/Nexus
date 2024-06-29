@@ -2,6 +2,7 @@ import Developer from "./Developer";
 import Genre from "./Genre";
 import Platform from "./Platform";
 import Publisher from "./Publisher";
+import Store from "./Store";
 import Tag from "./Tag";
 
 export default interface Game {
@@ -28,4 +29,6 @@ export default interface Game {
   requirements: { minimum: string; recommended: string };
   playtime: number;
   short_screenshots: { id: number; image: string }[];
+  updated?: string;
+  stores: { id: number; url: string; store: Store }[];
 }

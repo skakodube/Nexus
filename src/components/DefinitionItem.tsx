@@ -20,7 +20,7 @@ const DefinitionItem = ({
         mb={2}
         fontSize={"sm"}
         fontWeight={"600"}
-        color="gray.600"
+        color="hsla(0,0%,100%,.2)"
         as={"dl"}
       >
         {term}
@@ -33,7 +33,7 @@ const DefinitionItem = ({
       borderBottom={isLast ? "0" : "1px solid hsla(0, 0%, 100%, .07)"}
       justifyContent={"space-between"}
     >
-      <Heading fontSize={"12px"} fontWeight={"600"} color="gray.600" as={"dl"}>
+      <Heading fontSize={"12px"} fontWeight={"600"} color="gray.500" as={"dl"}>
         {term + ":"}
       </Heading>
       {children}
