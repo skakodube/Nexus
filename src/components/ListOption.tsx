@@ -2,7 +2,6 @@ import { Box, HStack, Icon, Text, useColorModeValue } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
 interface Props {
-  id: number;
   image: React.ElementType;
   name: string;
   selected: boolean;

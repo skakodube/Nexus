@@ -12,6 +12,7 @@ import GenreList from "../components/GenreList";
 import NavBar from "../components/NavBar";
 import PlatformList from "../components/PlatformList";
 import useGameQueryStore from "../store/gameQueryStore";
+import NewReleasesList from "../components/NewReleasesList";
 
 const Layout = () => {
   const color = useColorModeValue("black", "white");
@@ -37,6 +38,26 @@ const Layout = () => {
 
       <Show above="lg">
         <GridItem my={10} area={"aside"}>
+          <Link to={"/"}>
+            <Box mb={5} onClick={() => resetGameQuery()}>
+              <Button
+                variant="link"
+                fontSize={"2xl"}
+                fontWeight={"bold"}
+                style={{ textDecoration: "none" }}
+                color={color}
+                _hover={{ color: hoverColor }}
+              >
+                Home
+              </Button>
+            </Box>
+          </Link>
+          <Box mb={5}>
+            <Heading mb={3} fontSize="2xl">
+              New Releases
+            </Heading>
+            <NewReleasesList />
+          </Box>
           <Link to={"games/"}>
             <Box mb={5} onClick={() => resetGameQuery()}>
               <Button

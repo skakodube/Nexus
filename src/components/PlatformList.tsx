@@ -48,7 +48,6 @@ const PlatformList = () => {
               w="100%"
             >
               <ListOption
-                id={platform.id}
                 name={platform.name}
                 image={matchPlatformIcon(platform.slug)}
                 selected={platform?.id == selectedPlatformId}

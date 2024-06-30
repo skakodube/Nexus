@@ -1,3 +1,4 @@
+import moment from "moment";
 import { create } from "zustand";
 
 export interface GameQuery {
@@ -20,6 +21,9 @@ interface GameQueryStore {
   setSortOrder: (sortOrder: string) => void;
   resetGameQuery: () => void;
   setTrending: () => void;
+  setLastThirtyDays: () => void;
+  setThisWeek: () => void;
+  setNextWeek: () => void;
 }
 
 const useGameQueryStore = create<GameQueryStore>((set) => ({
@@ -44,6 +48,30 @@ const useGameQueryStore = create<GameQueryStore>((set) => ({
       gameQuery: {
         sortOrder: "-released,-rating",
         dates: "2024-01-01,2024-12-31",
+      },
+    })),
+  setLastThirtyDays: () =>
+    set(() => ({
+      gameQuery: {
+        dates: `${moment()
+          .subtract(30, "days")
+          .format("YYYY-MM-DD")},${moment().format("YYYY-MM-DD")}`,
+      },
+    })),
+  setThisWeek: () =>
+    set(() => ({
+      gameQuery: {
+        dates: `${moment().format("YYYY-MM-DD")},${moment()
+          .add(7, "days")
+          .format("YYYY-MM-DD")}`,
+      },
+    })),
+  setNextWeek: () =>
+    set(() => ({
+      gameQuery: {
+        dates: `${moment().add(7, "days").format("YYYY-MM-DD")},${moment()
+          .add(14, "days")
+          .format("YYYY-MM-DD")}`,
       },
     })),
 }));
