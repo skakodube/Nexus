@@ -11,7 +11,7 @@ import { Link, Outlet } from "react-router-dom";
 import GenreList from "../components/GenreList";
 import NavBar from "../components/NavBar";
 import PlatformList from "../components/PlatformList";
-import useGameQueryStore from "../store";
+import useGameQueryStore from "../store/gameQueryStore";
 
 const Layout = () => {
   const color = useColorModeValue("black", "white");

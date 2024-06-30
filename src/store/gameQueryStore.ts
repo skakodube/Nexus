@@ -23,7 +23,7 @@ interface GameQueryStore {
 }
 
 const useGameQueryStore = create<GameQueryStore>((set) => ({
-  gameQuery: {},
+  gameQuery: { searchText: "" },
   setSearchText: (searchText) => set(() => ({ gameQuery: { searchText } })),
   setGenreId: (genreId) =>
     set((store) => ({ gameQuery: { ...store.gameQuery, genreId } })),
@@ -49,4 +49,3 @@ const useGameQueryStore = create<GameQueryStore>((set) => ({
 }));
 
 export default useGameQueryStore;
-// ordering=-released,-rating&dates=2023-01-01,2023-12-31

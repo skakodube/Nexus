@@ -6,7 +6,7 @@ import DisplaySelector from "../components/DisplaySelector";
 import GameGrid from "../components/GameGrid";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import useGameQueryStore from "../store";
+import useGameQueryStore from "../store/gameQueryStore";
 
 const GameBrowse = () => {
   const [columnDisplay, setColumnDisplay] = useState(false);
@@ -21,7 +21,7 @@ const GameBrowse = () => {
   return (
     <>
       <GameHeading />
-      <HStack mb={4} justifyContent="space-between" w={"100%"}>
+      <HStack mb={7} justifyContent="space-between" w={"100%"}>
         <HStack spacing={2}>
           <SortSelector />
           <PlatformSelector />

@@ -1,4 +1,4 @@
-import { Box, Grid, GridItem, Text } from "@chakra-ui/react";
+import { Box, Divider, Grid, GridItem, Text } from "@chakra-ui/react";
 import DefinitionItem from "./DefinitionItem";
 import Game from "../entities/Game";
 import { Link as ReactRouterLink } from "react-router-dom";

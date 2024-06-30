@@ -8,7 +8,7 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import usePlatforms from "../hooks/usePlatforms";
-import useGameQueryStore from "../store";
+import useGameQueryStore from "../store/gameQueryStore";
 
 const PlatformSelector = () => {
   const selectedPlatformId = useGameQueryStore((s) => s.gameQuery.platformId);

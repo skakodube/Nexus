@@ -25,7 +25,7 @@ import dateFormat from "../services/date-format";
 import GameMedia from "../components/GameMedia";
 import { platformIconMap } from "../components/PlatformIconList";
 import { Link as ReactRouterLink } from "react-router-dom";
-import usePageData from "../stores/pageData";
+import usePageData from "../store/pageDataStore";
 import { useEffect } from "react";
 import storeIconMap from "../data/storeIconMap";
 

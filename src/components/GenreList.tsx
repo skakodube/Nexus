@@ -10,7 +10,7 @@ import {
 import useGenres from "../hooks/useGenres";
 import { useState } from "react";
 import ExtendList from "./ExtendList";
-import useGameQueryStore from "../store";
+import useGameQueryStore from "../store/gameQueryStore";
 import { Link } from "react-router-dom";
 
 const GenreList = () => {
@@ -36,7 +36,7 @@ const GenreList = () => {
             role="group"
             w="100%"
           >
-            <Link to={`games/${genre.slug}`}>
+            <Link to={`games`}>
               <HStack>
                 <Image
                   borderRadius={6}

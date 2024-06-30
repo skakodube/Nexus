@@ -34,7 +34,7 @@ const GameMedia = ({ gameId }: Props) => {
       : [noImage, noImage, noImage];
 
   return (
-    <Grid gridTemplateRows={`repeat(4}, 1fr)`} gap={1}>
+    <Grid gridTemplateRows={`repeat(4}, 1fr)`} gap={4}>
       <GridItem colSpan={2} rowSpan={2}>
         <AspectRatio ratio={16 / 9}>
           {first ? (

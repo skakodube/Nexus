@@ -1,5 +1,5 @@
 import { Box } from "@chakra-ui/react";
-import usePageData from "../stores/pageData";
+import usePageData from "../store/pageDataStore";
 import { ReactNode } from "react";
 
 interface Props {

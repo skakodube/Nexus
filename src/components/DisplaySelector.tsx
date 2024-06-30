@@ -13,7 +13,7 @@ interface Props {
 }
 
 const DisplaySelector = ({ columnDisplay, setColumnDisplay }: Props) => {
-  const iconColor = useColorModeValue("gray.300", "gray.600");
+  const iconColor = useColorModeValue("gray.300", "gray.550");
   const iconColorActive = useColorModeValue("white", "gray.300");
 
   return (

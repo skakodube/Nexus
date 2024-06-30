@@ -23,7 +23,7 @@ const NavBar = () => {
     window.open(url, "_blank", "noopener,noreferrer");
   };
   return (
-    <HStack paddingY={7}>
+    <HStack paddingY={6}>
       <Link to={"/"}>
         <Icon
           as={RiGamepadLine}

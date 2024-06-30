@@ -5,15 +5,9 @@ interface Props {
   term: string;
   children: ReactNode | ReactNode[];
   isVertical?: boolean;
-  isLast?: boolean;
 }
 
-const DefinitionItem = ({
-  term,
-  children,
-  isVertical = true,
-  isLast = false,
-}: Props) => {
+const DefinitionItem = ({ term, children, isVertical = true }: Props) => {
   return isVertical ? (
     <Box marginY={3}>
       <Heading
@@ -28,11 +22,7 @@ const DefinitionItem = ({
       <Box as={"dd"}>{children}</Box>
     </Box>
   ) : (
-    <HStack
-      _groupHover={{ paddingY: 3 }}
-      borderBottom={isLast ? "0" : "1px solid hsla(0, 0%, 100%, .07)"}
-      justifyContent={"space-between"}
-    >
+    <HStack _groupHover={{ paddingY: 3 }} justifyContent={"space-between"}>
       <Heading fontSize={"12px"} fontWeight={"600"} color="gray.500" as={"dl"}>
         {term + ":"}
       </Heading>

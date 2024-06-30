@@ -14,10 +14,10 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import Game from "../entities/Game";
 
 interface Props {
-  isSingleColumnDisplay: boolean;
+  isSingleColumnDisplay?: boolean;
 }
 
-const GameGrid = ({ isSingleColumnDisplay }: Props) => {
+const GameGrid = ({ isSingleColumnDisplay = false }: Props) => {
   const spinnerBgColor = useColorModeValue("gray.200", "gray.700");
   const spinnerColor = useColorModeValue("gray.400", "gray.600");
   const skeletons = Array.from({ length: 12 }, (_, index) => index + 1);

@@ -7,6 +7,7 @@ import {
   Text,
   Link as ChakraLink,
   useColorModeValue,
+  Divider,
 } from "@chakra-ui/react";
 import PlatformIconList from "./PlatformIconList";
 import Game from "../entities/Game";
@@ -97,6 +98,8 @@ const DefinitionItems = ({ game, isWide, isPlaceholder = false }: Props) => {
           <DefinitionItem term="Release date" isVertical={false}>
             <Text>{dateFormat(game.released)}</Text>
           </DefinitionItem>
+          <Divider orientation="horizontal" />
+
           <DefinitionItem term="Genres" isVertical={false}>
             <HStack gap={"5px"}>
               {game.genres
@@ -110,7 +113,8 @@ const DefinitionItems = ({ game, isWide, isPlaceholder = false }: Props) => {
                 ))}
             </HStack>
           </DefinitionItem>
-          <DefinitionItem term="Age rating" isVertical={false} isLast={true}>
+          <Divider orientation="horizontal" />
+          <DefinitionItem term="Age rating" isVertical={false}>
             <Text>{game.esrb_rating?.name || "Not rated"}</Text>
           </DefinitionItem>
         </Box>

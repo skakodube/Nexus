@@ -3,7 +3,7 @@ import { Box, List, ListItem, SkeletonText } from "@chakra-ui/react";
 import usePlatforms from "../hooks/usePlatforms";
 import { platformIconMap } from "./PlatformIconList";
 import ListOption from "./ListOption";
-import useGameQueryStore from "../store";
+import useGameQueryStore from "../store/gameQueryStore";
 import Platform from "../entities/Platform";
 
 const mainPlatforms = [
@@ -52,7 +52,7 @@ const PlatformList = () => {
                 name={platform.name}
                 image={matchPlatformIcon(platform.slug)}
                 selected={platform?.id == selectedPlatformId}
-                link={`/games/${platform.slug}`}
+                link={`/games`}
               ></ListOption>
             </Box>
           </ListItem>

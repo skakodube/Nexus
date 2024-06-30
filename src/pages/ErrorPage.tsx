@@ -10,7 +10,11 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
-import { isRouteErrorResponse, useRouteError } from "react-router-dom";
+import {
+  Link as ReactRouterLink,
+  isRouteErrorResponse,
+  useRouteError,
+} from "react-router-dom";
 
 const ErrorPage = () => {
   const error = useRouteError();
@@ -51,6 +55,8 @@ const ErrorPage = () => {
                 fontSize={"lg"}
                 colorScheme="gray"
                 paddingY={6}
+                as={ReactRouterLink}
+                to={"/"}
               >
                 Main Page
               </Button>

@@ -3,6 +3,7 @@ import Layout from "./pages/Layout";
 import ErrorPage from "./pages/ErrorPage";
 import GameBrowse from "./pages/GameBrowse";
 import GameDetailsPage from "./pages/GameDetailsPage";
+import GameSearch from "./pages/GameSearch";
 
 const router = createBrowserRouter([
   {
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
       {
         path: "games/:slug",
         element: <GameDetailsPage />,
+      },
+      {
+        path: "search",
+        element: <GameSearch />,
       },
     ],
   },

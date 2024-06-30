@@ -3,7 +3,7 @@ import CollapsibleTextBox from "./CollapsibleTextBox";
 import TagBar from "./TagBar";
 import useGenre from "../hooks/useGenre";
 import usePlatform from "../hooks/usePlatform";
-import useGameQueryStore from "../store";
+import useGameQueryStore from "../store/gameQueryStore";
 import { convert } from "html-to-text";
 import { useLocation } from "react-router-dom";
 
@@ -31,7 +31,11 @@ const GameHeading = () => {
 
   return (
     <Box mb={3}>
-      <Heading as="h1" fontSize={{ base: "4xl", sm: "6xl", md: "7xl" }}>
+      <Heading
+        as="h1"
+        color={"white"}
+        fontSize={{ base: "4xl", sm: "6xl", md: "7xl" }}
+      >
         {heading}
       </Heading>
       {currentLocation.pathname === "/" && (

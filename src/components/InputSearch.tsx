@@ -9,9 +9,9 @@ import {
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { useRef } from "react";
-import useGameQueryStore from "../store";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useRef } from "react";
+import useGameQueryStore from "../store/gameQueryStore";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const InputSearch = () => {
   const ref = useRef<HTMLInputElement>(null);
@@ -19,16 +19,35 @@ const InputSearch = () => {
   const bgColorActive = useColorModeValue("gray.200", "white");
   const color = useColorModeValue("gray.700", "rgba(255, 255, 255, 0.6)");
   const colorActive = useColorModeValue("black", "black");
-  const navigate = useNavigate();
 
   const setSearchText = useGameQueryStore((s) => s.setSearchText);
+
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const queryParams = new URLSearchParams(location.search);
+  const queryParamValue = queryParams.get("query");
+
+  useEffect(() => {
+    if (queryParamValue !== null) {
+      setSearchText(queryParamValue);
+    }
+
+    return () => {
+      if (ref.current) {
+        ref.current.value = "";
+      }
+    };
+  }, [queryParamValue]);
 
   return (
     <form
       onSubmit={(event) => {
         event.preventDefault();
-        if (ref.current) setSearchText(ref.current.value);
-        navigate("/");
+        if (ref.current) {
+          setSearchText(ref.current.value);
+          navigate(`/search?query=${ref.current.value}`);
+        }
       }}
     >
       <InputGroup role="group" size={"md"}>
