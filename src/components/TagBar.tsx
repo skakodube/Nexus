@@ -1,6 +1,6 @@
 import { Button, Text, Wrap, WrapItem } from "@chakra-ui/react";
 import useTags from "../hooks/useTags";
-import useGameQueryStore from "../store";
+import useGameQueryStore from "../store/gameQueryStore";
 
 const TagBar = () => {
   const setTagId = useGameQueryStore((s) => s.setTagId);

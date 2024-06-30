@@ -4,6 +4,7 @@ import ErrorPage from "./pages/ErrorPage";
 import GameBrowse from "./pages/GameBrowse";
 import GameDetailsPage from "./pages/GameDetailsPage";
 import GameSearch from "./pages/GameSearch";
+import HomePage from "./pages/HomePage";
 
 const router = createBrowserRouter([
   {
@@ -13,7 +14,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <GameBrowse />,
+        element: <HomePage />,
       },
       {
         path: "games/",

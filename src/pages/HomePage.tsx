@@ -4,8 +4,21 @@ import SortSelector from "../components/SortSelector";
 import PlatformSelector from "../components/PlatformSelector";
 import DisplaySelector from "../components/DisplaySelector";
 import GameGrid from "../components/GameGrid";
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import useGameQueryStore from "../store/gameQueryStore";
 
-const GameBrowse = () => {
+const HomePage = () => {
+  const currentLocation = useLocation();
+
+  const setTrending = useGameQueryStore((g) => g.setTrending);
+  const resetGameQuery = useGameQueryStore((g) => g.resetGameQuery);
+
+  useEffect(() => {
+    setTrending();
+
+    return resetGameQuery;
+  }, [currentLocation.pathname, setTrending]);
   return (
     <>
       <GameHeading />
@@ -21,4 +34,4 @@ const GameBrowse = () => {
   );
 };
 
-export default GameBrowse;
+export default HomePage;

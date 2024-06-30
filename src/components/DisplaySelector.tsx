@@ -6,15 +6,14 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import { CiGrid2H, CiGrid41 } from "react-icons/ci";
+import usePageData from "../store/pageDataStore";
 
-interface Props {
-  columnDisplay: boolean;
-  setColumnDisplay: (isColumn: boolean) => void;
-}
-
-const DisplaySelector = ({ columnDisplay, setColumnDisplay }: Props) => {
+const DisplaySelector = () => {
   const iconColor = useColorModeValue("gray.300", "gray.550");
   const iconColorActive = useColorModeValue("white", "gray.300");
+
+  const isColumnDisplay = usePageData((s) => s.isColumnDisplay);
+  const setIsColumnDisplay = usePageData((s) => s.setIsColumnDisplay);
 
   return (
     <HStack display={{ base: "none", lg: "flex" }}>
@@ -34,10 +33,10 @@ const DisplaySelector = ({ columnDisplay, setColumnDisplay }: Props) => {
         }
         borderRadius={8}
         boxSize="50px"
-        cursor={columnDisplay ? "pointer" : "default"}
-        disabled={!columnDisplay}
-        isActive={!columnDisplay}
-        onClick={() => setColumnDisplay(false)}
+        cursor={isColumnDisplay ? "pointer" : "default"}
+        disabled={!isColumnDisplay}
+        isActive={!isColumnDisplay}
+        onClick={() => setIsColumnDisplay(false)}
         role="group"
       />
 
@@ -53,10 +52,10 @@ const DisplaySelector = ({ columnDisplay, setColumnDisplay }: Props) => {
         }
         borderRadius={8}
         boxSize="50px"
-        cursor={!columnDisplay ? "pointer" : "default"}
-        disabled={columnDisplay}
-        isActive={columnDisplay}
-        onClick={() => setColumnDisplay(true)}
+        cursor={!isColumnDisplay ? "pointer" : "default"}
+        disabled={isColumnDisplay}
+        isActive={isColumnDisplay}
+        onClick={() => setIsColumnDisplay(true)}
         role="group"
       />
     </HStack>

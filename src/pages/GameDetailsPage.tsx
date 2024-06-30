@@ -16,7 +16,6 @@ import {
   BreadcrumbLink,
   Icon,
   SimpleGrid,
-  Link as ChakraLink,
   Button,
 } from "@chakra-ui/react";
 import CollapsibleTextBox from "../components/CollapsibleTextBox";
