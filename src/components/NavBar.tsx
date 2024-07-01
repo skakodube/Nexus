@@ -1,5 +1,4 @@
 import {
-  Box,
   Button,
   HStack,
   Icon,
@@ -7,7 +6,6 @@ import {
   Text,
   Center,
 } from "@chakra-ui/react";
-import ColorModeSwitch from "./ColorModeSwitch";
 import InputSearch from "./InputSearch";
 import { RiGamepadLine } from "react-icons/ri";
 import { FaGithub } from "react-icons/fa";
