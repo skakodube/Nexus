@@ -5,6 +5,7 @@ import {
   Icon,
   useColorModeValue,
   Text,
+  Center,
 } from "@chakra-ui/react";
 import ColorModeSwitch from "./ColorModeSwitch";
 import InputSearch from "./InputSearch";
@@ -22,31 +23,34 @@ const NavBar = () => {
     const url = "https://github.com/skakodube";
     window.open(url, "_blank", "noopener,noreferrer");
   };
+
   return (
-    <HStack paddingY={6}>
+    <HStack paddingY={{ base: 3, md: 6 }} alignItems={"center"}>
       <Link to={"/"}>
-        <Icon
-          as={RiGamepadLine}
-          boxSize={"44px"}
-          cursor={"pointer"}
-          mr={{ base: 3, md: 6 }}
-        ></Icon>
+        <Center>
+          <Icon
+            as={RiGamepadLine}
+            boxSize={{ base: "34px", md: "44px" }}
+            cursor={"pointer"}
+            mr={{ base: 2, md: 6 }}
+          ></Icon>
+        </Center>
       </Link>
 
       <Button
         _hover={{ bg: hoverBg, color: hoverColor }}
         alignItems={"center"}
         bg={defaultBg}
-        borderRadius={{ base: 100, md: 6 }}
+        borderRadius={{ base: 20, md: 6 }}
         color={defaultColor}
         display={"flex"}
         height={"26px"}
-        ml={{ base: 3, md: 0 }}
-        mr={5}
+        ml={{ base: 2, md: 0 }}
+        mr={{ base: 0, md: 5 }}
         onClick={() => handleButtonClick()}
         order={{ base: 3, md: 0 }}
         paddingX={{ base: 0, md: "20px" }}
-        paddingY={{ base: "16px", md: "0" }}
+        paddingY={{ base: "14px", md: "0" }}
       >
         <Icon boxSize={"20px"} as={FaGithub} />{" "}
         <Text ml={2} display={{ base: "none", md: "inline" }}>
@@ -55,9 +59,6 @@ const NavBar = () => {
       </Button>
 
       <InputSearch></InputSearch>
-      <Box display={{ base: "none", lg: "block" }}>
-        <ColorModeSwitch />
-      </Box>
     </HStack>
   );
 };

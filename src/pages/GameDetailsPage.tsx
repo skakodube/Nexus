@@ -17,6 +17,7 @@ import {
   Icon,
   SimpleGrid,
   Button,
+  Flex,
 } from "@chakra-ui/react";
 import CollapsibleTextBox from "../components/CollapsibleTextBox";
 import GameAttributes from "../components/GameAttributes";
@@ -60,76 +61,84 @@ const GameDetailsPage = () => {
   return (
     <Center>
       <Grid
-        gridTemplateColumns={"55% 40%"}
+        gridTemplateColumns={{ base: "1fr", md: "55% 40%" }}
         maxW={"960px"}
         rowGap={8}
         columnGap={12}
+        mb={20}
       >
-        <GridItem colSpan={2}>
-          <Breadcrumb
-            spacing={1}
-            separator="/"
-            textTransform={"uppercase"}
-            fontSize={"10px"}
-            color={"gray.500"}
-            letterSpacing={"1.5px"}
-            fontWeight={"500"}
-          >
-            <BreadcrumbItem>
-              <BreadcrumbLink
-                textDecor={"none"}
-                as={ReactRouterLink}
-                _hover={{ color: "white" }}
-                to={"/"}
-              >
-                Home
-              </BreadcrumbLink>
-            </BreadcrumbItem>
-
-            <BreadcrumbItem>
-              <BreadcrumbLink
-                textDecor={"none"}
-                as={ReactRouterLink}
-                to={"/games"}
-                _hover={{ color: "white" }}
-              >
-                Games
-              </BreadcrumbLink>
-            </BreadcrumbItem>
-
-            <BreadcrumbItem isCurrentPage>
-              <BreadcrumbLink>{game.name}</BreadcrumbLink>
-            </BreadcrumbItem>
-          </Breadcrumb>
+        <GridItem colSpan={{ base: 1, md: 2 }}>
+          <Flex justifyContent={{ base: "center", md: "left" }}>
+            <Breadcrumb
+              spacing={1}
+              separator="/"
+              textTransform={"uppercase"}
+              fontSize={"10px"}
+              color={"gray.500"}
+              letterSpacing={"1.5px"}
+              fontWeight={"500"}
+            >
+              <BreadcrumbItem>
+                <BreadcrumbLink
+                  textDecor={"none"}
+                  as={ReactRouterLink}
+                  _hover={{ color: "white" }}
+                  to={"/"}
+                >
+                  Home
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbItem>
+                <BreadcrumbLink
+                  textDecor={"none"}
+                  as={ReactRouterLink}
+                  to={"/games"}
+                  _hover={{ color: "white" }}
+                >
+                  Games
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbItem isCurrentPage>
+                <BreadcrumbLink>{game.name}</BreadcrumbLink>
+              </BreadcrumbItem>
+            </Breadcrumb>
+          </Flex>
         </GridItem>
         <GridItem>
-          <HStack spacing={4} ml={1}>
-            {game.released && (
-              <Badge
-                bg={defaultBg}
-                borderRadius="4px"
-                color={defaultColor}
-                fontWeight={400}
-                fontSize={"12px"}
-                letterSpacing={"1.5px"}
-                padding={"1px 6px"}
-              >
-                {dateFormat(game.released)}
-              </Badge>
-            )}
-            {game.platforms && (
-              <HStack justifyContent={"space-between"}>
-                {game.parent_platforms.map((platform) => (
-                  <Icon
-                    key={platform.platform.id}
-                    boxSize={"18px"}
-                    as={platformIconMap[platform.platform.slug]}
-                  ></Icon>
-                ))}
-              </HStack>
-            )}
+          <Flex
+            alignItems={{ base: "center", md: "start" }}
+            flexDirection={{ base: "column", md: "row" }}
+          >
+            <HStack spacing={4} ml={1}>
+              {game.released && (
+                <Badge
+                  bg={defaultBg}
+                  borderRadius="4px"
+                  color={defaultColor}
+                  fontWeight={400}
+                  fontSize={"12px"}
+                  letterSpacing={"1.5px"}
+                  padding={"1px 6px"}
+                >
+                  {dateFormat(game.released)}
+                </Badge>
+              )}
+              {game.platforms && (
+                <HStack justifyContent={"space-between"}>
+                  {game.parent_platforms.map((platform) => (
+                    <Icon
+                      key={platform.platform.id}
+                      boxSize={"18px"}
+                      as={platformIconMap[platform.platform.slug]}
+                    ></Icon>
+                  ))}
+                </HStack>
+              )}
+            </HStack>
             {game.playtime > 0 && (
               <Text
+                ml={{ base: 0, md: 3 }}
+                mt={{ base: 4, md: 0 }}
                 fontSize={"13px"}
                 letterSpacing={"1.5px"}
                 textTransform={"uppercase"}
@@ -137,8 +146,12 @@ const GameDetailsPage = () => {
                 {"average play time: " + game.playtime + " hours"}
               </Text>
             )}
-          </HStack>
-          <Heading marginY={2} fontSize={"72px"}>
+          </Flex>
+          <Heading
+            marginY={2}
+            fontSize={{ base: "5xl", md: "72px" }}
+            textAlign={{ base: "center", md: "left" }}
+          >
             {game.name}
           </Heading>
           <Box marginY={5}>
@@ -178,12 +191,14 @@ const GameDetailsPage = () => {
           </Heading>
           <SimpleGrid gridTemplateColumns={"1fr 1fr"} mt={5} gap={4}>
             {game.stores.map((store) => (
-              <GridItem>
+              <GridItem key={store.id}>
                 <Button
                   as={ReactRouterLink}
                   to={"https://" + store.store.domain}
                   w={"100%"}
                   variant={"solid"}
+                  whiteSpace={"normal"}
+                  textAlign={"center"}
                   rightIcon={
                     <Icon
                       boxSize={6}

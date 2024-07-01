@@ -61,8 +61,8 @@ const useGameQueryStore = create<GameQueryStore>((set) => ({
   setThisWeek: () =>
     set(() => ({
       gameQuery: {
-        dates: `${moment().format("YYYY-MM-DD")},${moment()
-          .add(7, "days")
+        dates: `${moment().subtract(4, "days").format("YYYY-MM-DD")},${moment()
+          .add(4, "days")
           .format("YYYY-MM-DD")}`,
       },
     })),
@@ -70,7 +70,7 @@ const useGameQueryStore = create<GameQueryStore>((set) => ({
     set(() => ({
       gameQuery: {
         dates: `${moment().add(7, "days").format("YYYY-MM-DD")},${moment()
-          .add(14, "days")
+          .add(8, "days")
           .format("YYYY-MM-DD")}`,
       },
     })),

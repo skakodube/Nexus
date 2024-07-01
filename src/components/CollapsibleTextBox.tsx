@@ -18,8 +18,14 @@ const CollapsibleTextBox = ({ children, charLimit }: Props) => {
       : children;
 
   return (
-    <Box>
-      {isExpanded ? children : previewText}{" "}
+    <Box
+      whiteSpace="normal" // Allow normal wrapping
+    >
+      <Text
+        wordBreak="break-word" // Ensure words can break mid-word if too long
+      >
+        {isExpanded ? children : previewText}
+      </Text>
       {children.length > charLimit && !isExpanded && (
         <Button
           bg={defaultBg}

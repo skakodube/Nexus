@@ -50,11 +50,8 @@ const InputSearch = () => {
         }
       }}
     >
-      <InputGroup role="group" size={"md"}>
-        <InputLeftElement
-          color={"gray.500"}
-          display={{ base: "none", sm: "flex" }}
-        >
+      <InputGroup role="group" size={{ base: "sm", md: "md" }}>
+        <InputLeftElement color={"gray.500"} display={"flex"}>
           <Icon as={Search2Icon} boxSize="15px" />
         </InputLeftElement>
 

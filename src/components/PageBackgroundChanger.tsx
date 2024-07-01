@@ -13,6 +13,7 @@ const PageBackgroundChanger = ({ children }: Props) => {
     <Box
       backgroundImage={`linear-gradient(to bottom, rgba(21,21,21,0.7) 0%, rgba(21,21,21,1) 70%), url(${backgroundImage})`}
       backgroundSize="cover"
+      backgroundPosition={"center"}
       backgroundRepeat="no-repeat"
       height={"100vh"}
     >

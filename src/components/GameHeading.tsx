@@ -30,8 +30,9 @@ const GameHeading = () => {
   const description = platform?.description || genre?.description || "";
 
   return (
-    <Box mb={3}>
+    <Box mb={{ base: 8, md: 3 }}>
       <Heading
+        textAlign={{ base: "center", md: "left" }}
         as="h1"
         color={"white"}
         fontSize={{ base: "4xl", sm: "6xl", md: "7xl" }}
@@ -39,7 +40,9 @@ const GameHeading = () => {
         {heading}
       </Heading>
       {currentLocation.pathname === "/" && (
-        <Text m={0}>Based on player counts and release date</Text>
+        <Text textAlign={{ base: "center", md: "left" }} m={0}>
+          Based on player counts and release date
+        </Text>
       )}
       {description && (
         <Box marginY={4} display={{ base: "none", sm: "block" }}>

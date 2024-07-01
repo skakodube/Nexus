@@ -3,22 +3,39 @@ import SortSelector from "../components/SortSelector";
 import PlatformSelector from "../components/PlatformSelector";
 import DisplaySelector from "../components/DisplaySelector";
 import GameGrid from "../components/GameGrid";
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import useGameQueryStore from "../store/gameQueryStore";
 
 const GameDiscover = () => {
   const { timeframe } = useParams();
-  const currentLocation = useLocation();
 
-  const setLastThirtyDays = useGameQueryStore((s) => s.setLastThirtyDays);
-  const resetGameQuery = useGameQueryStore((s) => s.resetGameQuery);
+  const { setLastThirtyDays, setThisWeek, setNextWeek, resetGameQuery } =
+    useGameQueryStore((state) => ({
+      setLastThirtyDays: state.setLastThirtyDays,
+      setThisWeek: state.setThisWeek,
+      setNextWeek: state.setNextWeek,
+      resetGameQuery: state.resetGameQuery,
+    }));
 
   useEffect(() => {
-    setLastThirtyDays();
+    switch (timeframe) {
+      case "last-30-days":
+        setLastThirtyDays();
+        break;
+      case "this-week":
+        setThisWeek();
+        break;
+      case "next-week":
+        setNextWeek();
+        break;
+      default:
+        resetGameQuery();
+        break;
+    }
 
     return resetGameQuery;
-  }, [currentLocation.pathname, setLastThirtyDays]);
+  }, [timeframe, setLastThirtyDays, setThisWeek, setNextWeek, resetGameQuery]);
 
   return (
     <>

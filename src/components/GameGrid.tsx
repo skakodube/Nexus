@@ -1,8 +1,11 @@
 import {
   Box,
   Center,
+  Image,
   SimpleGrid,
   Spinner,
+  Text,
+  VStack,
   useBreakpointValue,
   useColorModeValue,
 } from "@chakra-ui/react";
@@ -29,6 +32,33 @@ const GameGrid = () => {
 
   const fetchedGamesCount =
     data?.pages.reduce((total, page) => total + page.results.length, 0) || 0;
+
+  if (isLoading)
+    return (
+      <SimpleGrid columns={currentColumns} spacing={6}>
+        {isLoading &&
+          skeletons.map((skeleton) => (
+            <GameCardContainer key={skeleton}>
+              <GameCardSkeleton />
+            </GameCardContainer>
+          ))}
+      </SimpleGrid>
+    );
+
+  if (!fetchedGamesCount)
+    return (
+      <Center>
+        <VStack marginY={8} spacing={4}>
+          <Image
+            boxSize={"90px"}
+            src="https://rawg.io/assets/images/no-results.69f6b603a88b970899af402b59d84919.png"
+          ></Image>
+          <Text fontSize={"xl"} color="gray.500">
+            No games found. Try clearing all filters.
+          </Text>
+        </VStack>
+      </Center>
+    );
 
   const distributeCardsEvenly = (games: Game[], columns: number) => {
     // Create an array for each column
@@ -71,12 +101,6 @@ const GameGrid = () => {
       }
     >
       <SimpleGrid columns={currentColumns} spacing={6}>
-        {isLoading &&
-          skeletons.map((skeleton) => (
-            <GameCardContainer key={skeleton}>
-              <GameCardSkeleton />
-            </GameCardContainer>
-          ))}
         {isColumnDisplay ? (
           <Center>
             {distributedCards.map((column, columnIndex) => (
